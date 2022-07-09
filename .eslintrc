@@ -1,0 +1,138 @@
+{
+    "env": {
+      "browser": true,
+      "es2020": true,
+      "node": true
+    },
+    "extends": [
+      "airbnb",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:react/recommended",
+      "plugin:import/errors",
+      "plugin:import/warnings",
+      "plugin:import/typescript",
+      "prettier"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": 2020,
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "project": [
+        "tsconfig.json"
+      ],
+      "sourceType": "module"
+    },
+    "plugins": [
+      "@typescript-eslint",
+      "react",
+      "prettier",
+      "simple-import-sort",
+      "sort-keys-fix"
+    ],
+    "rules": {
+      "camelcase": [
+        0
+      ],
+      "sort-keys-fix/sort-keys-fix": 2,
+      "sort-keys": [
+        "error",
+        "asc",
+        {
+          "caseSensitive": true,
+          "natural": false,
+          "minKeys": 2
+        }
+      ],
+      "react/function-component-definition": "off",
+      "import/no-import-module-exports": "off",
+      "react/no-danger": "off",
+      "no-param-reassign": [
+        "error",
+        {
+          "props": true,
+          "ignorePropertyModificationsFor": [
+            "state"
+          ]
+        }
+      ],
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".ts",
+            ".tsx"
+          ]
+        }
+      ],
+      "import/extensions": 0,
+      "react/prop-types": 0,
+      "react/jsx-props-no-spreading": "off",
+      "prettier/prettier": [
+        "error",
+        {
+          "endOfLine": "auto"
+        }
+      ],
+      "no-use-before-define": "off",
+      "@typescript-eslint/no-use-before-define": [
+        "error"
+      ],
+      "react/react-in-jsx-scope": 0,
+      "import/no-extraneous-dependencies": [
+        "error",
+        {
+          "devDependencies": [
+            "**/*.stories.tsx"
+          ]
+        }
+      ],
+      "no-shadow": "off",
+      "@typescript-eslint/no-shadow": [
+        "error"
+      ],
+      "import/prefer-default-export": "off",
+      "jsx-a11y/label-has-associated-control": [
+        2,
+        {
+          "controlComponents": [
+            "Select"
+          ],
+          "depth": 3
+        }
+      ],
+      "@typescript-eslint/no-empty-function": "off",
+      "simple-import-sort/imports": "error",
+      "simple-import-sort/exports": "error",
+      "react/jsx-sort-props": "error"
+    },
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "moduleDirectory": [
+            "node_modules",
+            "src"
+          ]
+        }
+      }
+    },
+    "overrides": [
+      {
+        "files": "server /**/*.js",
+        "env": {
+          "node": true
+        },
+        "rules": {
+          "simple-import-sort/imports": "off",
+          "import/order": [
+            "error",
+            {
+              "newlines-between": "always"
+            }
+          ]
+        }
+      }
+    ]
+  }
+  
