@@ -13,13 +13,12 @@ import {
 } from '@chakra-ui/react';
 
 import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { GasTable } from './components/GasTable';
-import { NewGas } from './components/NewGas';
+import { NewGasDischarge } from './components/NewGasDischarge';
 
 export const App = () => (
   <ChakraProvider theme={theme}>
     <Box p={5}>
-      <NewGas />
+      <NewGasDischarge />
     </Box>
     {/* <Box fontSize="xl" textAlign="center">
       <Grid minH="100vh" p={3}>

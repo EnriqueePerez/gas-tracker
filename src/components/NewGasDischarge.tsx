@@ -6,19 +6,51 @@ import {
   FormLabel,
   Heading,
   Input,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
   Select,
   Textarea,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 
+interface NewGasDischargeForm {
+  unit: string | undefined;
+}
+
 export const NewGasDischarge = () => {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState<NewGasDischargeForm>({
+    unit: undefined,
+  });
 
   const handleInput = (e: any) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const defineMaxTankWeight = () => {
+    switch (formData.unit) {
+      case 'Conservación 1':
+        return 4;
+      case 'Conservación 2':
+        return 5;
+      case 'Cerveza':
+      case 'Hielo':
+        return 3.5;
+      case 'Koxka':
+      case 'Salchikoxka':
+        return 1.1;
+      case 'Vitrina':
+      case 'Imbera':
+      case 'Enfriador de cargas':
+        return 0.5;
+      default:
+        return 0;
+    }
   };
 
   return (
@@ -70,10 +102,15 @@ export const NewGasDischarge = () => {
         <Input name="startHour" onChange={handleInput} type="time" />
         <FormHelperText>Hora en que se empezó a cargar el gas</FormHelperText>
       </FormControl>
-      <FormControl marginY="4">
-        {/* Revisar si tiene sentido agregar NumberInput para agregar algun max o min */}
+      <FormControl isDisabled={!formData.unit} marginY="4">
         <FormLabel htmlFor="tankWeight">Peso actual de la boya (kg)</FormLabel>
-        <Input id="tankWeight" onChange={handleInput} type="number" />
+        <NumberInput max={defineMaxTankWeight()} min={0}>
+          <NumberInputField id="amount" />
+          <NumberInputStepper>
+            <NumberIncrementStepper />
+            <NumberDecrementStepper />
+          </NumberInputStepper>
+        </NumberInput>
         <FormHelperText>
           Peso de la boya luego de cargar el gas al equipo, en kilos
         </FormHelperText>
