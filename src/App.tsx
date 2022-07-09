@@ -1,8 +1,11 @@
 import {
   Box,
+  Button,
+  ButtonGroup,
   ChakraProvider,
   Code,
   Grid,
+  Heading,
   Link,
   Text,
   theme,
@@ -10,29 +13,39 @@ import {
 } from '@chakra-ui/react';
 
 import { ColorModeSwitcher } from './ColorModeSwitcher';
-import { Logo } from './Logo';
+import { GasTable } from './components/GasTable';
+import { NewGas } from './components/NewGas';
 
 export const App = () => (
   <ChakraProvider theme={theme}>
-    <Box fontSize="xl" textAlign="center">
+    <Box p={5}>
+      <NewGas />
+    </Box>
+    {/* <Box fontSize="xl" textAlign="center">
       <Grid minH="100vh" p={3}>
         <ColorModeSwitcher justifySelf="flex-end" />
-        <VStack spacing={8}>
-          <Logo h="40vmin" pointerEvents="none" />
-          <Text>
-            Edit <Code fontSize="xl">src/App.tsx</Code> and save to reload.
-          </Text>
-          <Link
-            color="teal.500"
-            fontSize="2xl"
-            href="https://chakra-ui.com"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            Learn Chakra
-          </Link>
-        </VStack>
+        <Heading as="h1" size="lg">
+          Boyas Activas
+        </Heading>
+        <GasTable />
+        <Button
+          colorScheme="blue"
+          justifySelf="center"
+          maxWidth="300px"
+          width="80%"
+        >
+          Añadir boya
+        </Button>
+        <Button
+          colorScheme="blue"
+          justifySelf="center"
+          maxWidth="300px"
+          width="80%"
+        >
+          Añadir registro a boyas
+        </Button>
+        <VStack spacing={8} />
       </Grid>
-    </Box>
+    </Box> */}
   </ChakraProvider>
 );
