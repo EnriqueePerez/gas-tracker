@@ -2,11 +2,12 @@
 import { useState } from 'react';
 import env from 'react-dotenv';
 
-interface Tank {
-  id: string;
-  owner_id: number;
-  refrigerant: string;
-  tankWeight: number;
+export interface Tank {
+  id: string | null;
+  owner_id: number | null;
+  owner_name: string | null;
+  refrigerant: string | null;
+  tankWeight: number | null;
   registered_at?: string;
   status?: string;
 }

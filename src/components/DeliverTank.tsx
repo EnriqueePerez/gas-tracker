@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Box,
   FormControl,
@@ -7,12 +6,12 @@ import {
   Heading,
   Select,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 export const DeliverTank = () => {
   const [formData, setFormData] = useState({});
 
-  const handleInput = (e: any) => {
+  const handleInput = (e: ChangeEvent<HTMLSelectElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,

@@ -1,10 +1,11 @@
-import { ColorModeScript } from '@chakra-ui/react';
+import { ChakraProvider, ColorModeScript, theme } from '@chakra-ui/react';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import { FirebaseAppProvider } from 'reactfire';
 
-import { App } from './App';
 import { FirebaseComponents } from './components/FirebaseComponents';
+import { App } from './containers/App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 
@@ -23,14 +24,18 @@ const firebaseConfig = {
 };
 
 root.render(
-  <React.StrictMode>
-    <FirebaseAppProvider firebaseConfig={firebaseConfig}>
-      <FirebaseComponents>
+  <FirebaseAppProvider firebaseConfig={firebaseConfig}>
+    <FirebaseComponents>
+      <ChakraProvider theme={theme}>
         <ColorModeScript />
-        <App />
-      </FirebaseComponents>
-    </FirebaseAppProvider>
-  </React.StrictMode>,
+        <React.StrictMode>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </React.StrictMode>
+      </ChakraProvider>
+    </FirebaseComponents>
+  </FirebaseAppProvider>,
 );
 
 // If you want your app to work offline and load faster, you can change
