@@ -7,12 +7,22 @@ import {
   Input,
 } from '@chakra-ui/react';
 import { useField } from 'formik';
+import { nanoid } from 'nanoid';
 
 export interface IInputFieldProps extends FormControlProps {
+  /**
+   * Input data suggestions, this property is optional.
+   */
+  datalist?: string[];
   /**
    * Helper text, this property is optional.
    */
   helperText?: string;
+  /**
+   * Input unique identifier for datalists, this property is optional but
+   * required if using a datalist.
+   */
+  inputList?: string;
   /**
    * Input label, this property is optional.
    */
@@ -36,7 +46,17 @@ export interface IInputFieldProps extends FormControlProps {
 }
 
 export const InputField = (props: IInputFieldProps): JSX.Element => {
-  const { helperText, label, name, placeholder, size, type, ...rest } = props;
+  const {
+    datalist,
+    helperText,
+    inputList,
+    label,
+    name,
+    placeholder,
+    size,
+    type,
+    ...rest
+  } = props;
 
   const [field, meta] = useField(name);
 
@@ -53,12 +73,21 @@ export const InputField = (props: IInputFieldProps): JSX.Element => {
       ) : null}
 
       <Input
+        list={inputList}
         placeholder={placeholder}
         rounded={4}
         size={size}
         type={type}
         {...field}
       />
+
+      {datalist ? (
+        <datalist id={inputList}>
+          {datalist?.map((item) => (
+            <option key={nanoid()}>{item}</option>
+          ))}
+        </datalist>
+      ) : null}
 
       {meta.error ? (
         <FormErrorMessage fontSize="xs" fontWeight="bold">
@@ -76,7 +105,9 @@ export const InputField = (props: IInputFieldProps): JSX.Element => {
 };
 
 InputField.defaultProps = {
+  datalist: [],
   helperText: undefined,
+  inputList: undefined,
   label: undefined,
   placeholder: undefined,
   size: 'sm',

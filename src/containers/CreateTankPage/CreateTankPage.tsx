@@ -1,7 +1,6 @@
 import { Box, Heading } from '@chakra-ui/react';
 
-import { ICreateTankFormValues } from '../../components/forms';
-import { CreateTankForm } from '../../components/forms/CreateTankForm/CreateTankForm';
+import { CreateTankForm, ICreateTankFormValues } from '../../components/forms';
 import { ITank, useTanks } from '../../hooks/useTanks';
 
 export const CreateTankPage = (): JSX.Element => {

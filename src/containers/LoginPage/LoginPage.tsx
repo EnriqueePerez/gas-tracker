@@ -19,14 +19,14 @@ export const LoginPage = (): JSX.Element => {
   };
 
   return (
-    <Box alignItems="center" display="flex" flexDir="column" p={4}>
-      <Heading fontSize={{ base: '1.5rem', lg: '1.75rem' }} mb={6}>
+    <Box alignItems="center" display="flex" flexDir="column" px={4} py={20}>
+      <Heading fontSize="1.75rem" mb={6}>
         Inicia Sesión
       </Heading>
 
       <LoginForm
         onSubmit={handleOnSubmit}
-        width={{ base: '100%', lg: '800px' }}
+        width={{ base: '100%', md: '480px' }}
       />
     </Box>
   );

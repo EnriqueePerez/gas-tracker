@@ -2,8 +2,7 @@ import { Box, BoxProps, Button } from '@chakra-ui/react';
 import { Form, Formik, FormikHelpers } from 'formik';
 
 import { InputField } from '../../inputs';
-import { ILoginFormValues } from './helpers';
-import { ValidationSchema } from './helpers/form-helpers';
+import { ILoginFormValues, ValidationSchema } from './helpers';
 
 export interface ILoginFormProps extends Omit<BoxProps, 'onSubmit'> {
   /**
@@ -32,7 +31,7 @@ export const LoginForm = (props: ILoginFormProps) => {
           <InputField label="Password" mb={6} name="password" type="password" />
 
           <Button
-            colorScheme="blue"
+            colorScheme="facebook"
             isDisabled={isSubmitting || !isValid}
             isLoading={isSubmitting}
             size="sm"

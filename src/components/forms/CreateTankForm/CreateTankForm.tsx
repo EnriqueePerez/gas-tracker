@@ -1,5 +1,6 @@
 import { Box, BoxProps, Button } from '@chakra-ui/react';
-import { Form, Formik, FormikHelpers } from 'formik';
+import { Form, Formik, FormikHelpers, FormikProps } from 'formik';
+import { forwardRef } from 'react';
 
 import { InputField, SelectField } from '../../inputs';
 import { ICreateTankFormValues, ValidationSchema } from './helpers';
@@ -16,19 +17,27 @@ export interface ICreateTankFormProps extends Omit<BoxProps, 'onSubmit'> {
     v: ICreateTankFormValues,
     h?: FormikHelpers<ICreateTankFormValues>,
   ) => void;
+  /**
+   * If `true`, the submit button will be rendered on the form.
+   */
+  showSubmitButton?: boolean;
 }
 
-export const CreateTankForm = (props: ICreateTankFormProps) => {
-  const { initialValues, onSubmit, ...rest } = props;
+export const CreateTankForm = forwardRef<
+  FormikProps<ICreateTankFormValues>,
+  ICreateTankFormProps
+>((props, ref) => {
+  const { initialValues, onSubmit, showSubmitButton, ...rest } = props;
 
   return (
     <Formik
       initialValues={initialValues as ICreateTankFormValues}
+      innerRef={ref}
       onSubmit={onSubmit}
       validationSchema={ValidationSchema}
     >
       {({ isSubmitting, isValid }) => (
-        <Box as={Form} {...rest}>
+        <Box as={Form} id="create-tank-form" {...rest}>
           <InputField
             helperText="Identificador o serie de la boya"
             label="Identificador o serie"
@@ -59,22 +68,27 @@ export const CreateTankForm = (props: ICreateTankFormProps) => {
             type="number"
           />
 
-          <Button
-            colorScheme="blue"
-            isDisabled={isSubmitting || !isValid}
-            isLoading={isSubmitting}
-            size="sm"
-            type="submit"
-            width="100%"
-          >
-            Registrar boya
-          </Button>
+          {showSubmitButton ? (
+            <Button
+              colorScheme="facebook"
+              isDisabled={isSubmitting || !isValid}
+              isLoading={isSubmitting}
+              size="sm"
+              type="submit"
+              width="100%"
+            >
+              Registrar
+            </Button>
+          ) : null}
         </Box>
       )}
     </Formik>
   );
-};
+});
 
 CreateTankForm.defaultProps = {
   initialValues: { id: '', refrigerant: '', tankWeight: 0 },
+  showSubmitButton: false,
 };
+
+CreateTankForm.displayName = 'CreateTankForm';
