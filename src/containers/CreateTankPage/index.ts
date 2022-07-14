@@ -1,0 +1,1 @@
+export { CreateTankPage } from './CreateTankPage';

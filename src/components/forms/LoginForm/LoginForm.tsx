@@ -25,15 +25,24 @@ export const LoginForm = (props: ILoginFormProps) => {
       onSubmit={onSubmit}
       validationSchema={ValidationSchema}
     >
-      <Box as={Form} {...rest}>
-        <InputField label="Email" mb={4} name="email" type="email" />
+      {({ isSubmitting, isValid }) => (
+        <Box as={Form} {...rest}>
+          <InputField label="Email" mb={4} name="email" type="email" />
 
-        <InputField label="Password" mb={6} name="password" type="password" />
+          <InputField label="Password" mb={6} name="password" type="password" />
 
-        <Button colorScheme="blue" size="sm" type="submit" width="100%">
-          Iniciar Sesión
-        </Button>
-      </Box>
+          <Button
+            colorScheme="blue"
+            isDisabled={isSubmitting || !isValid}
+            isLoading={isSubmitting}
+            size="sm"
+            type="submit"
+            width="100%"
+          >
+            Iniciar Sesión
+          </Button>
+        </Box>
+      )}
     </Formik>
   );
 };
