@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 
 import { ColorModeSwitcher } from '../../ColorModeSwitcher';
+import { CreateGasDischargePage } from '../CreateGasDischargePage/CreateGasDischargePage';
 import { CreateTankPage } from '../CreateTankPage';
 import { HomePage } from '../HomePage/HomePage';
 import { LoginPage } from '../LoginPage/LoginPage';
@@ -16,6 +17,10 @@ export const App = () => (
       <Route element={<LoginPage />} path="/login" />
       <Route element={<CreateTankPage />} path="/create-tank" />
       <Route element={<TransferTankPage />} path="/transfer-tank" />
+      <Route
+        element={<CreateGasDischargePage />}
+        path="/create-gas-discharge"
+      />
       <Route element={<NotFoundPage />} path="*" />
     </Routes>
   </>
