@@ -1,0 +1,1 @@
+export { TransferTankPage } from './TransferTankPage';
