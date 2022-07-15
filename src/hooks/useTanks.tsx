@@ -30,7 +30,7 @@ export interface ITank {
   /**
    * Weight of the tank.
    */
-  tankWeight: number | null;
+  tank_weight: number | null;
 }
 
 export const useTanks = () => {

@@ -44,7 +44,7 @@ export const TanksTable = () => {
                 <Td>{tank.id}</Td>
                 <Td>{tank.owner_name}</Td>
                 <Td>{tank.refrigerant}</Td>
-                <Td isNumeric>{tank.tankWeight}</Td>
+                <Td isNumeric>{tank.tank_weight}</Td>
                 <Td>
                   {new Date(tank.registered_at as string).toLocaleString()}
                 </Td>

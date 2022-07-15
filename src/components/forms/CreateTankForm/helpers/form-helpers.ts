@@ -4,11 +4,11 @@ import { ITank } from '../../../../hooks/useTanks';
 
 export type ICreateTankFormValues = Pick<
   ITank,
-  'id' | 'refrigerant' | 'tankWeight'
+  'id' | 'refrigerant' | 'tank_weight'
 >;
 
 export const ValidationSchema = Yup.object().shape({
   id: Yup.string().required(),
   refrigerant: Yup.string().required(),
-  tankWeight: Yup.number().min(10).required(),
+  tank_weight: Yup.number().min(10).required(),
 });

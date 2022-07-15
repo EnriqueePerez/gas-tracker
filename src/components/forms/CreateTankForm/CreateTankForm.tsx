@@ -64,7 +64,7 @@ export const CreateTankForm = forwardRef<
             helperText="Peso de la boya, en kilos"
             label="Peso de la boya (kg)"
             mb={4}
-            name="tankWeight"
+            name="tank_weight"
             type="number"
           />
 
@@ -87,7 +87,7 @@ export const CreateTankForm = forwardRef<
 });
 
 CreateTankForm.defaultProps = {
-  initialValues: { id: '', refrigerant: '', tankWeight: 0 },
+  initialValues: { id: '', refrigerant: '', tank_weight: 0 },
   showSubmitButton: false,
 };
 

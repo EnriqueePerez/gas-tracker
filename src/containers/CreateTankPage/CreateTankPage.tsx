@@ -12,7 +12,7 @@ export const CreateTankPage = (): JSX.Element => {
       owner_id: 9, // TODO: get from user
       owner_name: 'Enrique Perez', // TODO: get from user
       refrigerant: v.refrigerant,
-      tankWeight: v.tankWeight,
+      tank_weight: v.tank_weight,
     };
     try {
       await postTank(newTank);
