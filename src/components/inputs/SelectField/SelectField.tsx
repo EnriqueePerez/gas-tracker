@@ -7,6 +7,7 @@ import {
   Select,
 } from '@chakra-ui/react';
 import { useField } from 'formik';
+import { nanoid } from 'nanoid';
 
 export interface ISelectFieldProps extends FormControlProps {
   /**
@@ -29,10 +30,14 @@ export interface ISelectFieldProps extends FormControlProps {
    * Select size, default is `sm`.
    */
   size?: 'xs' | 'sm' | 'md' | 'lg';
+  /**
+   * Select options, this property is required.
+   */
+  options: string[];
 }
 
 export const SelectField = (props: ISelectFieldProps): JSX.Element => {
-  const { children, helperText, label, name, placeholder, size, ...rest } =
+  const { helperText, label, name, placeholder, size, options, ...rest } =
     props;
 
   const [field, meta] = useField(name);
@@ -50,7 +55,9 @@ export const SelectField = (props: ISelectFieldProps): JSX.Element => {
       ) : null}
 
       <Select placeholder={placeholder} rounded={4} size={size} {...field}>
-        {children}
+        {options
+          ? options.map((option) => <option key={nanoid()}>{option}</option>)
+          : null}
       </Select>
 
       {meta.error ? (

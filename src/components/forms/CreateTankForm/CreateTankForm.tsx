@@ -51,14 +51,9 @@ export const CreateTankForm = forwardRef<
             label="Refrigerante"
             mb={4}
             name="refrigerant"
+            options={['R22', 'R134', 'R404', 'R410', 'R449']}
             placeholder="Seleccione el equipo"
-          >
-            <option>R22</option>
-            <option>R134</option>
-            <option>R404</option>
-            <option>R410</option>
-            <option>R449</option>
-          </SelectField>
+          />
 
           <InputField
             helperText="Peso de la boya, en kilos"
