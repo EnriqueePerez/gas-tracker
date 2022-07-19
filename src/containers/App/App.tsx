@@ -1,27 +1,32 @@
+import { nanoid } from 'nanoid';
 import { Route, Routes } from 'react-router-dom';
+import { useSigninCheck } from 'reactfire';
 
 import { ColorModeSwitcher } from '../../ColorModeSwitcher';
-import { CreateGasDischargePage } from '../CreateGasDischargePage/CreateGasDischargePage';
-import { CreateTankPage } from '../CreateTankPage';
-import { HomePage } from '../HomePage/HomePage';
-import { LoginPage } from '../LoginPage/LoginPage';
-import { NotFoundPage } from '../NotFoundPage/NotFoundPage';
-import { TransferTankPage } from '../TransferTankPage/TransferTankPage';
+import { LoginPage } from '../LoginPage';
+import { NotFoundPage } from '../NotFoundPage';
+import { Protected } from './components/Protected';
+import { ROUTES } from './helpers/router-helpers';
 
-export const App = () => (
-  <>
-    <ColorModeSwitcher position="fixed" right={4} top={4} />
+export const App = (): JSX.Element | null => {
+  const { status } = useSigninCheck();
 
-    <Routes>
-      <Route element={<HomePage />} path="/" />
-      <Route element={<LoginPage />} path="/login" />
-      <Route element={<CreateTankPage />} path="/create-tank" />
-      <Route element={<TransferTankPage />} path="/transfer-tank" />
-      <Route
-        element={<CreateGasDischargePage />}
-        path="/create-gas-discharge"
-      />
-      <Route element={<NotFoundPage />} path="*" />
-    </Routes>
-  </>
-);
+  if (status === 'loading') return null;
+
+  return (
+    <>
+      <ColorModeSwitcher position="fixed" right={4} top={4} />
+
+      <Routes>
+        <Route element={<Protected />}>
+          {ROUTES.map(({ element: Element, path }) => (
+            <Route key={nanoid()} element={<Element />} path={path} />
+          ))}
+        </Route>
+
+        <Route element={<LoginPage />} path="/login" />
+        <Route element={<NotFoundPage />} path="*" />
+      </Routes>
+    </>
+  );
+};

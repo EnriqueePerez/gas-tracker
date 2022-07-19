@@ -1,3 +1,3 @@
 import { Heading } from '@chakra-ui/react';
 
-export const NotFoundPage = (): JSX.Element => <Heading>LoginPage</Heading>;
+export const NotFoundPage = (): JSX.Element => <Heading>NotFoundPage</Heading>;

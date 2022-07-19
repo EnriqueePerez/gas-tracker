@@ -28,7 +28,7 @@ export const HomePage = (): JSX.Element => {
 
   return (
     <Stack p={4}>
-      <Heading>HomePage</Heading>
+      <Heading>Gas Tracker</Heading>
 
       <Button
         alignSelf="end"

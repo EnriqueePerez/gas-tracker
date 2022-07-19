@@ -1,5 +1,7 @@
 import { Box, Heading } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
+import { useCallback } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
+import { useSigninCheck } from 'reactfire';
 
 import { ILoginFormValues, LoginForm } from '../../components/forms';
 import { useFirebaseLogin } from '../../hooks/useFirebaseLogin';
@@ -7,16 +9,23 @@ import { useFirebaseLogin } from '../../hooks/useFirebaseLogin';
 export const LoginPage = (): JSX.Element => {
   const { login } = useFirebaseLogin();
 
+  const { data } = useSigninCheck();
+
   const navigate = useNavigate();
 
-  const handleOnSubmit = async (v: ILoginFormValues) => {
-    try {
-      await login(v);
-      navigate('/');
-    } catch (error) {
-      console.log('hubo un error', error);
-    }
-  };
+  const handleOnSubmit = useCallback(
+    async (v: ILoginFormValues) => {
+      try {
+        await login(v);
+        navigate('/');
+      } catch (error) {
+        console.log('hubo un error', error);
+      }
+    },
+    [login, navigate],
+  );
+
+  if (data?.signedIn) return <Navigate to="/" />;
 
   return (
     <Box alignItems="center" display="flex" flexDir="column" px={4} py={20}>
