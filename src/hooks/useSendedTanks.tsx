@@ -2,18 +2,18 @@
 import { useState } from 'react';
 import env from 'react-dotenv';
 
-interface SendedTank {
+export interface ISendedTank {
   id?: string;
   tank_id: string;
-  timedate: string;
-  status: string;
-  new_owner: number;
+  status?: string;
+  new_owner_name: string;
+  new_owner_id: number;
 }
 
 export const useSendedTanks = () => {
-  const [sendedTanks, setSendedTanks] = useState<SendedTank[]>();
+  const [sendedTanks, setSendedTanks] = useState<ISendedTank[]>();
 
-  const postSendedTank = (tank: SendedTank) => {
+  const postSendedTank = (tank: ISendedTank) => {
     fetch(`${env.API_URL}/sended-tanks`, {
       body: JSON.stringify(tank),
       headers: {
@@ -32,7 +32,7 @@ export const useSendedTanks = () => {
       .catch((err) => console.log(err));
   };
 
-  const patchSendedTank = (tank: SendedTank) => {
+  const patchSendedTank = (tank: ISendedTank) => {
     fetch(`${env.API_URL}/sended-tanks/${tank.id}`, {
       body: JSON.stringify(tank),
       headers: {

@@ -5,6 +5,7 @@ import { CreateTankPage } from '../CreateTankPage';
 import { HomePage } from '../HomePage/HomePage';
 import { LoginPage } from '../LoginPage/LoginPage';
 import { NotFoundPage } from '../NotFoundPage/NotFoundPage';
+import { TransferTankPage } from '../TransferTankPage/TransferTankPage';
 
 export const App = () => (
   <>
@@ -14,6 +15,7 @@ export const App = () => (
       <Route element={<HomePage />} path="/" />
       <Route element={<LoginPage />} path="/login" />
       <Route element={<CreateTankPage />} path="/create-tank" />
+      <Route element={<TransferTankPage />} path="/transfer-tank" />
       <Route element={<NotFoundPage />} path="*" />
     </Routes>
   </>
