@@ -1,13 +1,15 @@
 import { Button, Heading, Stack, useDisclosure } from '@chakra-ui/react';
+import { useEffect } from 'react';
 
 import { ICreateTankFormValues } from '../../components/forms';
 import { ITank, useTanks } from '../../hooks/useTanks';
 import { CreateTankDrawer } from './components/CreateTankDrawer';
+import { TankListing } from './components/TankListing';
 
 export const HomePage = (): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const { postTank } = useTanks();
+  const { getTanks, postTank, tanks } = useTanks();
 
   const handleCreateTank = async (v: ICreateTankFormValues) => {
     const newTank: ITank = {
@@ -26,6 +28,11 @@ export const HomePage = (): JSX.Element => {
     }
   };
 
+  useEffect(() => {
+    getTanks();
+    console.log('aqui estan los tanks', tanks);
+  }, []);
+
   return (
     <Stack p={4}>
       <Heading>Gas Tracker</Heading>
@@ -39,6 +46,8 @@ export const HomePage = (): JSX.Element => {
       >
         Create
       </Button>
+
+      <TankListing mt={8} tanks={tanks} />
 
       <CreateTankDrawer
         isOpen={isOpen}
