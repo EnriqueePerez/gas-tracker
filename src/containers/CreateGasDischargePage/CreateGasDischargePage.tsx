@@ -1,4 +1,5 @@
 import { Box, Heading } from '@chakra-ui/react';
+import { useUser } from 'reactfire';
 
 import {
   CreateGasDischargeForm,
@@ -8,13 +9,14 @@ import { IGasDischarge, useGasDischarges } from '../../hooks/useGasDischarges';
 
 export const CreateGasDischargePage = (): JSX.Element => {
   const { postGasDischarge } = useGasDischarges();
+  const { data: user } = useUser();
 
   const handleOnSubmit = async (v: ICreateGasDischargeFormValues) => {
     const newGasDischarge: IGasDischarge = {
       actual_tank_weight: v.actual_tank_weight,
       comments: v.comments,
       folio: v.folio,
-      owner_name: 'Enrique Perez', // TODO: get from user
+      owner_name: user?.displayName as string,
       store: v.store,
       tank_id: v.tank_id,
       timedate_of_start: v.timedate_of_start,

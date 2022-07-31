@@ -1,5 +1,6 @@
 import { Button, Heading, Stack, useDisclosure } from '@chakra-ui/react';
 import { useEffect } from 'react';
+import { useUser } from 'reactfire';
 
 import { ICreateTankFormValues } from '../../components/forms';
 import { ITank, useTanks } from '../../hooks/useTanks';
@@ -10,12 +11,13 @@ export const HomePage = (): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { getTanks, postTank, tanks } = useTanks();
+  const { data: user } = useUser();
 
   const handleCreateTank = async (v: ICreateTankFormValues) => {
     const newTank: ITank = {
       id: v.id,
-      owner_id: 9, // TODO: get from user
-      owner_name: 'Enrique Perez', // TODO: get from user
+      owner_id: Number(user?.uid),
+      owner_name: user?.displayName as string,
       refrigerant: v.refrigerant,
       tank_weight: v.tank_weight,
     };
@@ -30,7 +32,6 @@ export const HomePage = (): JSX.Element => {
 
   useEffect(() => {
     getTanks();
-    console.log('aqui estan los tanks', tanks);
   }, []);
 
   return (

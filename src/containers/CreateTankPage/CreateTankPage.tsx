@@ -1,16 +1,18 @@
 import { Box, Heading } from '@chakra-ui/react';
+import { useUser } from 'reactfire';
 
 import { CreateTankForm, ICreateTankFormValues } from '../../components/forms';
 import { ITank, useTanks } from '../../hooks/useTanks';
 
 export const CreateTankPage = (): JSX.Element => {
   const { postTank } = useTanks();
+  const { data: user } = useUser();
 
   const handleOnSubmit = async (v: ICreateTankFormValues) => {
     const newTank: ITank = {
       id: v.id,
-      owner_id: 9, // TODO: get from user
-      owner_name: 'Enrique Perez', // TODO: get from user
+      owner_id: Number(user?.uid),
+      owner_name: user?.displayName as string,
       refrigerant: v.refrigerant,
       tank_weight: v.tank_weight,
     };
