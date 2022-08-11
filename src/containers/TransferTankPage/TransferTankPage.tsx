@@ -1,7 +1,9 @@
-import { Box, Heading } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { Heading } from '@chakra-ui/react';
+import { useEffect, useMemo, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useUser } from 'reactfire';
 
+import { BackButton, Layout } from '../../components/elements';
 import {
   ITransferTankFormValues,
   TransferTankForm,
@@ -16,6 +18,10 @@ export const TransferTankPage = (): JSX.Element => {
   const { data: user } = useUser();
   const { getUsers, users } = useUsers();
   const [tanksIds, setTanksIds] = useState<string[]>([]);
+
+  const location = useLocation();
+
+  const navigate = useNavigate();
 
   const getTanksIds = () => {
     getTanks().then((tanks) => {
@@ -43,21 +49,32 @@ export const TransferTankPage = (): JSX.Element => {
     }
   };
 
+  const initialValues = useMemo(
+    () => ({
+      new_owner_name: '',
+      tank_id: (location.state as { tank_id: string })?.tank_id,
+    }),
+    [location.state],
+  );
+
   useEffect(() => {
     getTanksIds();
     getUsers();
   }, []);
 
   return (
-    <Box alignItems="center" display="flex" flexDir="column" px={4} py={20}>
+    <Layout>
       <Heading mb="10">Transferencia de boya</Heading>
 
       <TransferTankForm
+        initialValues={initialValues}
         onSubmit={handleOnSubmit}
         tanks={tanksIds}
         users={users}
         width={{ base: '100%', md: '480px' }}
       />
-    </Box>
+
+      <BackButton onClick={() => navigate('/', { state: {} })} />
+    </Layout>
   );
 };

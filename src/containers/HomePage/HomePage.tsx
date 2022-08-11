@@ -2,6 +2,7 @@ import { Button, Heading, Stack, useDisclosure } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useUser } from 'reactfire';
 
+import { Layout } from '../../components/elements';
 import { ICreateTankFormValues } from '../../components/forms';
 import { ITank, useTanks } from '../../hooks/useTanks';
 import { CreateTankDrawer } from './components/CreateTankDrawer';
@@ -34,27 +35,33 @@ export const HomePage = (): JSX.Element => {
     getTanks();
   }, []);
 
+  // if(isFetchingTransferInvites) return null;
+
   return (
-    <Stack p={4}>
-      <Heading>Gas Tracker</Heading>
+    <Layout alignItems="start">
+      <Stack isInline justify="space-between" w="100%">
+        <Heading>Gas Tracker</Heading>
 
-      <Button
-        alignSelf="end"
-        colorScheme="green"
-        onClick={onOpen}
-        px={12}
-        size="sm"
-      >
-        Create
-      </Button>
+        <Button
+          alignSelf="end"
+          colorScheme="green"
+          onClick={onOpen}
+          px={12}
+          size="sm"
+        >
+          Create
+        </Button>
+      </Stack>
 
-      <TankListing mt={8} tanks={tanks} />
+      <TankListing mt={8} tanks={tanks} w="100%" />
 
       <CreateTankDrawer
         isOpen={isOpen}
         onClose={onClose}
         onSubmit={handleCreateTank}
       />
-    </Stack>
+
+      {/* <Modal isOpen={transferInvitations} /> */}
+    </Layout>
   );
 };

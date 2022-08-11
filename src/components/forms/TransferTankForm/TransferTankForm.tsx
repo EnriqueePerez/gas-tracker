@@ -41,6 +41,7 @@ export const TransferTankForm = (props: ITransferTankFormProps) => {
         <Box as={Form} {...rest}>
           <SelectField
             helperText="Seleccione la boya a entregar"
+            isDisabled
             label="Identificador de boya"
             mb={4}
             name="tank_id"
@@ -53,13 +54,6 @@ export const TransferTankForm = (props: ITransferTankFormProps) => {
             label="Receptor/Nuevo dueño"
             mb={4}
             name="new_owner_name"
-            // options={[
-            //   'Enrique Pérez',
-            //   'Mario Pérez',
-            //   'Francisco Rodriguez',
-            //   '1958943',
-            //   '2595893',
-            // ]}
             options={users.map((user) => user.name as string)}
             placeholder="Seleccione el usuario"
           />

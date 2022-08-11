@@ -6,8 +6,12 @@ import {
   Tbody,
   Thead,
   Tr,
+  useToast,
 } from '@chakra-ui/react';
 import { nanoid } from 'nanoid';
+import { useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useUser } from 'reactfire';
 
 import { Td, TdActions, Th } from '../../../components/libs';
 import { ITank } from '../../../hooks/useTanks';
@@ -24,6 +28,24 @@ export const TankListing: React.FC<ITankListingProps> = (
   props,
 ): JSX.Element => {
   const { tanks = [], ...rest } = props;
+
+  const { data: user } = useUser();
+
+  const navigate = useNavigate();
+
+  const toast = useToast();
+
+  const handleOnTransfer = useCallback(
+    (tank: ITank) => {
+      if (Number(user?.uid) === tank?.owner_id) {
+        navigate('/transfer-tank', { state: { tank_id: tank?.id } });
+      } else {
+        const description = 'Solo puedes transferir boyas de tu propiedad!';
+        toast({ description, status: 'error' });
+      }
+    },
+    [user],
+  );
 
   return (
     <Box {...rest}>
@@ -49,7 +71,7 @@ export const TankListing: React.FC<ITankListingProps> = (
               <TdActions
                 onInfo={() => console.log('info')}
                 onNewRegistry={() => console.log('new registry')}
-                onTransfer={() => console.log('transfer')}
+                onTransfer={() => handleOnTransfer(tank)}
               />
             </Tr>
           </Tbody>

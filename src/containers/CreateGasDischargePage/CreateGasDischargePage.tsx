@@ -1,6 +1,8 @@
-import { Box, Heading } from '@chakra-ui/react';
+import { Heading } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 import { useUser } from 'reactfire';
 
+import { BackButton, Layout } from '../../components/elements';
 import {
   CreateGasDischargeForm,
   ICreateGasDischargeFormValues,
@@ -10,6 +12,8 @@ import { IGasDischarge, useGasDischarges } from '../../hooks/useGasDischarges';
 export const CreateGasDischargePage = (): JSX.Element => {
   const { postGasDischarge } = useGasDischarges();
   const { data: user } = useUser();
+
+  const navigate = useNavigate();
 
   const handleOnSubmit = async (v: ICreateGasDischargeFormValues) => {
     const newGasDischarge: IGasDischarge = {
@@ -29,13 +33,15 @@ export const CreateGasDischargePage = (): JSX.Element => {
   };
 
   return (
-    <Box alignItems="center" display="flex" flexDir="column" p={4}>
+    <Layout>
       <Heading mb="10">Nueva descarga de gas</Heading>
 
       <CreateGasDischargeForm
         onSubmit={handleOnSubmit}
         width={{ base: '100%', lg: '800px' }}
       />
-    </Box>
+
+      <BackButton onClick={() => navigate('/')} />
+    </Layout>
   );
 };

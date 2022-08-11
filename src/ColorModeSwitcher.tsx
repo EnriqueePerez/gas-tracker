@@ -24,6 +24,7 @@ export const ColorModeSwitcher: React.FC<ColorModeSwitcherProps> = (props) => {
       onClick={toggleColorMode}
       size="md"
       variant="ghost"
+      zIndex="docked"
       {...props}
     />
   );

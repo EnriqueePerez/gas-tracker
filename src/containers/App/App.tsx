@@ -15,7 +15,7 @@ export const App = (): JSX.Element | null => {
 
   return (
     <>
-      <ColorModeSwitcher position="fixed" right={4} top={4} />
+      <ColorModeSwitcher position="absolute" right={4} top={4} />
 
       <Routes>
         <Route element={<Protected />}>
