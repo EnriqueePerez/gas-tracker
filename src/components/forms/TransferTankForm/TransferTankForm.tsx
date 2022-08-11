@@ -1,6 +1,7 @@
 import { Box, BoxProps, Button } from '@chakra-ui/react';
 import { Form, Formik, FormikHelpers } from 'formik';
 
+import { IUser } from '../../../hooks/useUsers';
 import { SelectField } from '../../inputs';
 import { ITransferTankFormValues, ValidationSchema } from './helpers';
 
@@ -16,10 +17,19 @@ export interface ITransferTankFormProps extends Omit<BoxProps, 'onSubmit'> {
     v: ITransferTankFormValues,
     h?: FormikHelpers<ITransferTankFormValues>,
   ) => void;
+
+  /**
+   * Current tanks id list.
+   */
+  tanks: string[];
+  /**
+   * Current users lists.
+   */
+  users: IUser[];
 }
 
 export const TransferTankForm = (props: ITransferTankFormProps) => {
-  const { initialValues, onSubmit, ...rest } = props;
+  const { initialValues, onSubmit, tanks, users, ...rest } = props;
 
   return (
     <Formik
@@ -34,7 +44,7 @@ export const TransferTankForm = (props: ITransferTankFormProps) => {
             label="Identificador de boya"
             mb={4}
             name="tank_id"
-            options={['231234123', '3488592', '1238549', '1958943', '2595893']}
+            options={tanks}
             placeholder="Seleccione la boya"
           />
 
@@ -43,13 +53,14 @@ export const TransferTankForm = (props: ITransferTankFormProps) => {
             label="Receptor/Nuevo dueño"
             mb={4}
             name="new_owner_name"
-            options={[
-              'Enrique Pérez',
-              'Mario Pérez',
-              'Francisco Rodriguez',
-              '1958943',
-              '2595893',
-            ]}
+            // options={[
+            //   'Enrique Pérez',
+            //   'Mario Pérez',
+            //   'Francisco Rodriguez',
+            //   '1958943',
+            //   '2595893',
+            // ]}
+            options={users.map((user) => user.name as string)}
             placeholder="Seleccione el usuario"
           />
 
@@ -70,5 +81,5 @@ export const TransferTankForm = (props: ITransferTankFormProps) => {
 };
 
 TransferTankForm.defaultProps = {
-  initialValues: { newOwnerName: '', tankId: '' },
+  initialValues: { newOwnerName: '', tankId: '', tanks: [] },
 };

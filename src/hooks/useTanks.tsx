@@ -48,12 +48,19 @@ export const useTanks = () => {
       .catch((err) => console.log(err));
   };
 
-  const getTanks = () => {
-    fetch(`${env.API_URL}/tanks`)
-      .then((res) => res.json())
-      .then((data) => setTanks(data))
-      .catch((err) => console.log(err));
-  };
+  const getTanks = (): Promise<ITank[]> =>
+    new Promise((resolve, reject) => {
+      fetch(`${env.API_URL}/tanks`)
+        .then((res) => res.json())
+        .then((data) => {
+          setTanks(data);
+          resolve(data);
+        })
+        .catch((err) => {
+          console.log(err);
+          reject(err);
+        });
+    });
 
   return { getTanks, postTank, tanks };
 };
