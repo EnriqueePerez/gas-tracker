@@ -31,27 +31,6 @@ export interface ICreateGasDischargeFormProps
 export const CreateGasDischargeForm = (props: ICreateGasDischargeFormProps) => {
   const { initialValues, onSubmit, ...rest } = props;
 
-  const defineMaxTankWeight = (unit: string) => {
-    switch (unit) {
-      case 'Conservación 1':
-        return 4;
-      case 'Conservación 2':
-        return 5;
-      case 'Cerveza':
-      case 'Hielo':
-        return 3.5;
-      case 'Koxka':
-      case 'Salchikoxka':
-        return 1.1;
-      case 'Vitrina':
-      case 'Imbera':
-      case 'Enfriador de cargas':
-        return 0.5;
-      default:
-        return 0;
-    }
-  };
-
   return (
     <Formik
       initialValues={initialValues as ICreateGasDischargeFormValues}
