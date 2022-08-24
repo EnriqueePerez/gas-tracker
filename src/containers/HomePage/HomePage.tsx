@@ -35,6 +35,7 @@ export const HomePage = (): JSX.Element => {
     getTanks();
   }, []);
 
+  // TODO: add loaders.
   // if(isFetchingTransferInvites) return null;
 
   return (
@@ -60,8 +61,6 @@ export const HomePage = (): JSX.Element => {
         onClose={onClose}
         onSubmit={handleCreateTank}
       />
-
-      {/* <Modal isOpen={transferInvitations} /> */}
     </Layout>
   );
 };

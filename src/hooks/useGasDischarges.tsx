@@ -6,6 +6,7 @@ export interface IGasDischarge {
   tank_id: string;
   comments: string;
   timedate_of_start: string;
+  timedate?: string;
   actual_tank_weight: number;
   owner_name: string;
   store: string;

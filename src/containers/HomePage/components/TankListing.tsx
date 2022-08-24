@@ -81,7 +81,9 @@ export const TankListing: React.FC<ITankListingProps> = (
                 {new Date(tank?.registered_at as string).toLocaleString()}
               </Td>
               <TdActions
-                onInfo={() => console.log('info')}
+                onInfo={() =>
+                  navigate('/tank-info', { state: { tank_id: tank?.id } })
+                }
                 onNewRegistry={() => handleOnNewRegistry(tank)}
                 onTransfer={() => handleOnTransfer(tank)}
               />

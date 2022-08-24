@@ -1,0 +1,1 @@
+export { TankInfoPage } from './TankInfoPage';
