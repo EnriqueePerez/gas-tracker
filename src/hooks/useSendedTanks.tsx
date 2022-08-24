@@ -13,7 +13,7 @@ export interface ISendedTank {
 export const useSendedTanks = () => {
   const [sendedTanks, setSendedTanks] = useState<ISendedTank[]>();
 
-  const postSendedTank = (tank: ISendedTank) => {
+  const postSendedTank = (tank: ISendedTank) =>
     fetch(`${env.API_URL}/sended-tanks`, {
       body: JSON.stringify(tank),
       headers: {
@@ -23,17 +23,18 @@ export const useSendedTanks = () => {
     })
       .then((res) => res.json())
       .catch((err) => console.log(err));
-  };
 
-  const getSendedTanks = () => {
+  const getSendedTanks = () =>
     fetch(`${env.API_URL}/sended-tanks`)
       .then((res) => res.json())
-      .then((data) => setSendedTanks(data))
+      .then((data) => {
+        setSendedTanks(data);
+        return data;
+      })
       .catch((err) => console.log(err));
-  };
 
-  const patchSendedTank = (tank: ISendedTank) => {
-    fetch(`${env.API_URL}/sended-tanks/${tank.id}`, {
+  const patchSendedTank = (tank: Partial<ISendedTank>, tank_id: string) =>
+    fetch(`${env.API_URL}/sended-tanks/${tank_id}`, {
       body: JSON.stringify(tank),
       headers: {
         'Content-Type': 'application/json',
@@ -42,7 +43,21 @@ export const useSendedTanks = () => {
     })
       .then((res) => res.json())
       .catch((err) => console.log(err));
+
+  const getTransferInvite = async (userId: string) => {
+    const invites: ISendedTank[] = await getSendedTanks();
+    const tranferInvites = invites?.filter(
+      (tank) => tank.new_owner_id === Number(userId),
+    );
+
+    return tranferInvites || [];
   };
 
-  return { getSendedTanks, patchSendedTank, postSendedTank, sendedTanks };
+  return {
+    getSendedTanks,
+    getTransferInvite,
+    patchSendedTank,
+    postSendedTank,
+    sendedTanks,
+  };
 };
