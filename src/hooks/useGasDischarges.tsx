@@ -15,7 +15,7 @@ export interface IGasDischarge {
 export const useGasDischarges = () => {
   const [gasDischarges, setGasDischarges] = useState<IGasDischarge[]>();
 
-  const postGasDischarge = (gasDischarge: IGasDischarge, tankId: string) => {
+  const postGasDischarge = (gasDischarge: IGasDischarge, tankId: string) =>
     fetch(`${env.API_URL}/tanks/${tankId}/gas-discharge`, {
       body: JSON.stringify(gasDischarge),
       headers: {
@@ -25,14 +25,12 @@ export const useGasDischarges = () => {
     })
       .then((res) => res.json())
       .catch((err) => console.log(err));
-  };
 
-  const getGasDischarges = (tankId: string) => {
+  const getGasDischarges = (tankId: string) =>
     fetch(`${env.API_URL}/tanks/${tankId}/gas-discharge`)
       .then((res) => res.json())
       .then((data) => setGasDischarges(data))
       .catch((err) => console.log(err));
-  };
 
   return { gasDischarges, getGasDischarges, postGasDischarge };
 };

@@ -14,6 +14,7 @@ export type ICreateGasDischargeFormValues = Pick<
 >;
 
 export const ValidationSchema = Yup.object().shape({
-  new_owner_name: Yup.string().required(),
-  tank_id: Yup.string().required(),
+  // TODO: add left validations
+  // new_owner_name: Yup.string().required(),
+  // tank_id: Yup.string().required(),
 });

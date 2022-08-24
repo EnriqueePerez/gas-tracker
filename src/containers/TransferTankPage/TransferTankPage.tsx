@@ -44,6 +44,7 @@ export const TransferTankPage = (): JSX.Element => {
     };
     try {
       postSendedTank(newTransferTank);
+      navigate('/', { state: {} });
     } catch (error) {
       console.log('hubo un error', error);
     }

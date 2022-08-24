@@ -1,5 +1,5 @@
-import { Heading } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
+import { Heading, useToast } from '@chakra-ui/react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useUser } from 'reactfire';
 
 import { BackButton, Layout } from '../../components/elements';
@@ -7,28 +7,36 @@ import {
   CreateGasDischargeForm,
   ICreateGasDischargeFormValues,
 } from '../../components/forms';
+import { getCurrentDate } from '../../helpers';
 import { IGasDischarge, useGasDischarges } from '../../hooks/useGasDischarges';
 
 export const CreateGasDischargePage = (): JSX.Element => {
   const { postGasDischarge } = useGasDischarges();
   const { data: user } = useUser();
 
+  const location = useLocation();
+
   const navigate = useNavigate();
 
+  const toast = useToast();
+
   const handleOnSubmit = async (v: ICreateGasDischargeFormValues) => {
-    const newGasDischarge: IGasDischarge = {
-      actual_tank_weight: v.actual_tank_weight,
-      comments: v.comments,
-      folio: v.folio,
+    const tank_id = (location.state as { tank_id: string })?.tank_id;
+    const payload: IGasDischarge = {
+      ...v,
       owner_name: user?.displayName as string,
-      store: v.store,
-      tank_id: v.tank_id,
-      timedate_of_start: v.timedate_of_start,
+      tank_id,
+      timedate_of_start: getCurrentDate(v.timedate_of_start),
     };
     try {
-      await postGasDischarge(newGasDischarge, v.tank_id);
+      await postGasDischarge(payload, tank_id);
+      const description = 'El registro fue creado exitosamente.';
+      toast({ description, status: 'success' });
+      navigate('/', { state: {} });
     } catch (error) {
-      console.log('hubo un error', error);
+      console.error(error);
+      const description = 'Ocurrio un error al procesar tu solicitud.';
+      toast({ description, status: 'error' });
     }
   };
 

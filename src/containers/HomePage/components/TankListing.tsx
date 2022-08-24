@@ -47,6 +47,18 @@ export const TankListing: React.FC<ITankListingProps> = (
     [user],
   );
 
+  const handleOnNewRegistry = useCallback(
+    (tank: ITank) => {
+      if (Number(user?.uid) === tank?.owner_id) {
+        navigate('/create-gas-discharge', { state: { tank_id: tank?.id } });
+      } else {
+        const description = 'Solo puedes modificar boyas de tu propiedad!';
+        toast({ description, status: 'error' });
+      }
+    },
+    [user],
+  );
+
   return (
     <Box {...rest}>
       <Table size="sm" variant="simple">
@@ -70,7 +82,7 @@ export const TankListing: React.FC<ITankListingProps> = (
               </Td>
               <TdActions
                 onInfo={() => console.log('info')}
-                onNewRegistry={() => console.log('new registry')}
+                onNewRegistry={() => handleOnNewRegistry(tank)}
                 onTransfer={() => handleOnTransfer(tank)}
               />
             </Tr>

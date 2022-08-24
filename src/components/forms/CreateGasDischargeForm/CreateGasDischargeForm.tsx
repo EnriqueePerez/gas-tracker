@@ -78,7 +78,7 @@ export const CreateGasDischargeForm = (props: ICreateGasDischargeFormProps) => {
             helperText="En caso de no encontrar la tienda en la lista, agreguela"
             label="Tienda"
             mb={4}
-            name="stores"
+            name="store"
             type="text"
           />
 
@@ -115,21 +115,6 @@ export const CreateGasDischargeForm = (props: ICreateGasDischargeFormProps) => {
             mb={4}
             name="actual_tank_weight"
             type="number"
-          />
-
-          <SelectField
-            helperText="Usuario quien recibe la boya"
-            label="Receptor/Nuevo dueño"
-            mb={4}
-            name="new_owner_name"
-            options={[
-              'Enrique Pérez',
-              'Mario Pérez',
-              'Francisco Rodriguez',
-              '1958943',
-              '2595893',
-            ]}
-            placeholder="Seleccione el usuario"
           />
 
           <TextAreaField
