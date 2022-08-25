@@ -4,7 +4,11 @@ export type ILayoutProps = BoxProps;
 
 export const Layout: React.FC<ILayoutProps> = (props): JSX.Element => {
   const { children, ...rest } = props;
-  return <Box {...rest}>{children}</Box>;
+  return (
+    <Box {...rest} overflowX="hidden">
+      {children}
+    </Box>
+  );
 };
 
 Layout.defaultProps = {
