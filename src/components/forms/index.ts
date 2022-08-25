@@ -1,3 +1,4 @@
+export * from './AcceptInviteForm';
 export * from './CreateGasDischargeForm';
 export * from './CreateTankForm';
 export * from './LoginForm';

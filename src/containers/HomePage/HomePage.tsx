@@ -1,10 +1,24 @@
-import { Button, Heading, Stack, useDisclosure } from '@chakra-ui/react';
+import {
+  Button,
+  Heading,
+  Stack,
+  useDisclosure,
+  useToast,
+} from '@chakra-ui/react';
 import { useCallback, useEffect, useState } from 'react';
 import { useUser } from 'reactfire';
 
-import { Layout } from '../../components/elements';
-import { InvitesMenu } from '../../components/elements/InvitesMenu/InvitesMenu';
-import { ICreateTankFormValues } from '../../components/forms';
+import {
+  AcceptInviteModal,
+  InvitesMenu,
+  Layout,
+} from '../../components/elements';
+import {
+  IAcceptInviteFormValues,
+  ICreateTankFormValues,
+  ILoginFormValues,
+} from '../../components/forms';
+import { useFirebaseLogin } from '../../hooks/useFirebaseLogin';
 import { ISendedTank, useSendedTanks } from '../../hooks/useSendedTanks';
 import { ITank, useTanks } from '../../hooks/useTanks';
 import { CreateTankDrawer } from './components/CreateTankDrawer';
@@ -12,11 +26,20 @@ import { TankListing } from './components/TankListing';
 
 export const HomePage = (): JSX.Element => {
   const [transferInvites, setTransferInvites] = useState<ISendedTank[]>([]);
+  const [acceptedTank, setAcceptedTank] = useState<Partial<ISendedTank>>({});
+  const [acceptedTankId, setAcceptedTankId] = useState<string>('');
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isModalOpen,
+    onOpen: onModalOpen,
+    onClose: onModalClose,
+  } = useDisclosure();
 
   const { getTanks, postTank, tanks } = useTanks();
   const { getTransferInvite, patchSendedTank } = useSendedTanks();
   const { data: user } = useUser();
+  const { login } = useFirebaseLogin();
+  const toast = useToast();
 
   const handleCreateTank = async (v: ICreateTankFormValues) => {
     const newTank: ITank = {
@@ -29,7 +52,6 @@ export const HomePage = (): JSX.Element => {
     try {
       await postTank(newTank);
       onClose();
-      // navigate('/');
     } catch (error) {
       console.log('hubo un error', error);
     }
@@ -39,6 +61,28 @@ export const HomePage = (): JSX.Element => {
     const invites = await getTransferInvite(user?.uid as string);
     setTransferInvites(invites);
   }, []);
+
+  const handleAcceptInvite = useCallback(
+    async (v: IAcceptInviteFormValues) => {
+      const payload: ILoginFormValues = {
+        ...v,
+        email: user?.email as string,
+      };
+      try {
+        await login(payload);
+        await patchSendedTank(acceptedTank, acceptedTankId);
+        await fetchTransferInvites();
+        const description = 'Boya aceptada exitosamente.';
+        toast({ description, status: 'success' });
+        onModalClose();
+      } catch (error) {
+        console.error(error);
+        const description = 'La contraseña es incorrecta';
+        toast({ description, status: 'error' });
+      }
+    },
+    [login],
+  );
 
   useEffect(() => {
     fetchTransferInvites();
@@ -73,8 +117,9 @@ export const HomePage = (): JSX.Element => {
       <InvitesMenu
         invites={transferInvites}
         onAccept={async (tank: Partial<ISendedTank>, id: string) => {
-          await patchSendedTank(tank, id);
-          await fetchTransferInvites();
+          setAcceptedTank(tank);
+          setAcceptedTankId(id);
+          onModalOpen();
         }}
         onReject={async (tank: Partial<ISendedTank>, id: string) => {
           await patchSendedTank(tank, id);
@@ -84,6 +129,12 @@ export const HomePage = (): JSX.Element => {
         right={16}
         top={4}
         user={user}
+      />
+
+      <AcceptInviteModal
+        handleAcceptInvite={handleAcceptInvite}
+        isOpen={isModalOpen}
+        onClose={onModalClose}
       />
     </Layout>
   );
