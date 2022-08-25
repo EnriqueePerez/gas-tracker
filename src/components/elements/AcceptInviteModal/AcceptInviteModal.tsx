@@ -9,7 +9,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 
-import { IAcceptInviteFormValues } from '../../forms';
+import { IAcceptInviteFormValues } from '../../forms/AcceptInviteForm';
 import { AcceptInviteForm } from '../../forms/AcceptInviteForm/AcceptInviteForm';
 
 export interface IAcceptInviteModalProps {

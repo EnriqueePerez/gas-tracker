@@ -1,1 +1,4 @@
-export { AcceptInviteModal } from './AcceptInviteModal';
+export {
+  type IAcceptInviteModalProps,
+  AcceptInviteModal,
+} from './AcceptInviteModal';

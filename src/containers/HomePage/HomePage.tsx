@@ -14,10 +14,10 @@ import {
   Layout,
 } from '../../components/elements';
 import {
-  IAcceptInviteFormValues,
   ICreateTankFormValues,
   ILoginFormValues,
 } from '../../components/forms';
+import { IAcceptInviteFormValues } from '../../components/forms/AcceptInviteForm/helpers/form-helpers';
 import { useFirebaseLogin } from '../../hooks/useFirebaseLogin';
 import { ISendedTank, useSendedTanks } from '../../hooks/useSendedTanks';
 import { ITank, useTanks } from '../../hooks/useTanks';

@@ -45,6 +45,7 @@
           "minKeys": 2
         }
       ],
+      "no-console": 0,
       "react/function-component-definition": "off",
       "import/no-import-module-exports": "off",
       "react/no-danger": "off",
