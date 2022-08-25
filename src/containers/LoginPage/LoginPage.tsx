@@ -1,4 +1,4 @@
-import { Box, Heading } from '@chakra-ui/react';
+import { Box, Heading, useToast } from '@chakra-ui/react';
 import { useCallback } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useSigninCheck } from 'reactfire';
@@ -12,6 +12,7 @@ export const LoginPage = (): JSX.Element => {
   const { data } = useSigninCheck();
 
   const navigate = useNavigate();
+  const toast = useToast();
 
   const handleOnSubmit = useCallback(
     async (v: ILoginFormValues) => {
@@ -19,7 +20,10 @@ export const LoginPage = (): JSX.Element => {
         await login(v);
         navigate('/');
       } catch (error) {
-        console.log('hubo un error', error);
+        console.error('hubo un error', error);
+        const description =
+          'Hubo un error al iniciar sesión. Por favor, verifica tus credenciaes.';
+        toast({ description, status: 'error' });
       }
     },
     [login, navigate],

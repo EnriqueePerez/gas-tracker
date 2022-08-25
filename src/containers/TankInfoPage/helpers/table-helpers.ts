@@ -1,8 +1,8 @@
 export const HEADERS = [
   'Folio',
-  'Dueño actual de la boya',
+  'Encargado de la descarga',
   'Tienda',
-  'Peso de la boya',
+  'Peso después de la descarga',
   'Hora de descarga',
   'Fecha de registro',
   'Comentarios',

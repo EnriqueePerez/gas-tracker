@@ -31,12 +31,16 @@ export interface ITank {
    * Weight of the tank.
    */
   tank_weight: number | null;
+  /**
+   * Initial Weight of the tank.
+   */
+  initial_weight?: number | null;
 }
 
 export const useTanks = () => {
   const [tanks, setTanks] = useState<ITank[]>();
 
-  const postTank = (tank: ITank) => {
+  const postTank = (tank: ITank) =>
     fetch(`${env.API_URL}/tanks`, {
       body: JSON.stringify(tank),
       headers: {
@@ -46,7 +50,6 @@ export const useTanks = () => {
     })
       .then((res) => res.json())
       .catch((err) => console.log(err));
-  };
 
   const getTanks = (): Promise<ITank[]> =>
     new Promise((resolve, reject) => {

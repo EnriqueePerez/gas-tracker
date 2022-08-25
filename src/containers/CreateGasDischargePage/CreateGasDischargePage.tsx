@@ -9,6 +9,7 @@ import {
 } from '../../components/forms';
 import { getCurrentDate } from '../../helpers';
 import { IGasDischarge, useGasDischarges } from '../../hooks/useGasDischarges';
+import { ITank } from '../../hooks/useTanks';
 
 export const CreateGasDischargePage = (): JSX.Element => {
   const { postGasDischarge } = useGasDischarges();
@@ -43,9 +44,13 @@ export const CreateGasDischargePage = (): JSX.Element => {
   return (
     <Layout>
       <Heading mb="10">Nueva descarga de gas</Heading>
+      <Heading size="sm">
+        Boya: {(location.state as { tank: ITank }).tank.id}
+      </Heading>
 
       <CreateGasDischargeForm
         onSubmit={handleOnSubmit}
+        tank={(location.state as { tank: ITank }).tank}
         width={{ base: '100%', lg: '800px' }}
       />
 

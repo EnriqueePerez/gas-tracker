@@ -1,4 +1,4 @@
-import { Heading } from '@chakra-ui/react';
+import { Heading, useToast } from '@chakra-ui/react';
 import { useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useUser } from 'reactfire';
@@ -23,6 +23,8 @@ export const TransferTankPage = (): JSX.Element => {
 
   const navigate = useNavigate();
 
+  const toast = useToast();
+
   const getTanksIds = () => {
     getTanks().then((tanks) => {
       // filter tanks by userid
@@ -43,10 +45,15 @@ export const TransferTankPage = (): JSX.Element => {
       tank_id: v.tank_id,
     };
     try {
-      postSendedTank(newTransferTank);
+      await postSendedTank(newTransferTank);
+      const description =
+        'La solicitud de transferencia se ha enviado correctamente.';
+      toast({ description, status: 'success' });
       navigate('/', { state: {} });
     } catch (error) {
-      console.log('hubo un error', error);
+      console.error('hubo un error', error);
+      const description = 'Hubo un error al tranferir la boya.';
+      toast({ description, status: 'error' });
     }
   };
 

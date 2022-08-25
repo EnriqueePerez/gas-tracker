@@ -50,7 +50,9 @@ export const TankListing: React.FC<ITankListingProps> = (
   const handleOnNewRegistry = useCallback(
     (tank: ITank) => {
       if (Number(user?.uid) === tank?.owner_id) {
-        navigate('/create-gas-discharge', { state: { tank_id: tank?.id } });
+        navigate('/create-gas-discharge', {
+          state: { tank: { ...tank }, tank_id: tank?.id },
+        });
       } else {
         const description = 'Solo puedes modificar boyas de tu propiedad!';
         toast({ description, status: 'error' });

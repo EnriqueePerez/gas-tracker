@@ -1,6 +1,7 @@
 import { Box, BoxProps, Button } from '@chakra-ui/react';
 import { Form, Formik, FormikHelpers } from 'formik';
 
+import { ITank } from '../../../hooks/useTanks';
 import { InputField, SelectField, TextAreaField } from '../../inputs';
 import { ICreateGasDischargeFormValues, ValidationSchema } from './helpers';
 
@@ -20,6 +21,10 @@ export interface ICreateGasDischargeFormProps
    */
   initialValues?: ICreateGasDischargeFormValues;
   /**
+   * The current tank that is being used(discharge).
+   */
+  tank?: ITank;
+  /**
    * Create Gas Discharge form on submit handler.
    */
   onSubmit: (
@@ -29,13 +34,17 @@ export interface ICreateGasDischargeFormProps
 }
 
 export const CreateGasDischargeForm = (props: ICreateGasDischargeFormProps) => {
-  const { initialValues, onSubmit, ...rest } = props;
+  const { tank, initialValues, onSubmit, ...rest } = props;
 
   return (
     <Formik
       initialValues={initialValues as ICreateGasDischargeFormValues}
       onSubmit={onSubmit}
-      validationSchema={ValidationSchema}
+      validationSchema={ValidationSchema(
+        tank?.tank_weight as number,
+        tank?.initial_weight as number,
+        tank?.refrigerant as string,
+      )}
     >
       {({ isSubmitting, isValid }) => (
         <Box as={Form} {...rest}>
@@ -129,4 +138,5 @@ CreateGasDischargeForm.defaultProps = {
     tank_id: '',
     timedate_of_start: '',
   },
+  tank: {},
 };
