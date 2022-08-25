@@ -51,9 +51,14 @@ export const HomePage = (): JSX.Element => {
     };
     try {
       await postTank(newTank);
+      const description = 'Boya creada exitosamente.';
+      toast({ description, status: 'success' });
+      await getTanks();
       onClose();
     } catch (error) {
       console.log('hubo un error', error);
+      const description = 'Hubo un error al registrar la boya.';
+      toast({ description, status: 'error' });
     }
   };
 

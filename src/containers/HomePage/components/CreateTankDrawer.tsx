@@ -60,9 +60,6 @@ export const CreateTankDrawer = (
           <Button
             colorScheme="facebook"
             form="create-tank-form"
-            //   isDisabled={ref?.current?.isSubmitting || !ref?.current?.isValid}
-            //   isLoading={ref?.current?.isSubmitting}
-            //   onClick={ref?.current?.submitForm}
             size="sm"
             type="submit"
             width="100%"

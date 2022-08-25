@@ -46,7 +46,7 @@ export const TankInfoPage = (): JSX.Element => {
                 <Td>{gd?.owner_name}</Td>
                 <Td>{gd?.store}</Td>
                 <Td>{gd?.actual_tank_weight}</Td>
-                <Td>{gd?.timedate_of_start}</Td>
+                <Td>{new Date(gd?.timedate_of_start).toLocaleString()}</Td>
                 <Td>{new Date(gd?.timedate as string).toLocaleString()}</Td>
                 <Td>{gd?.comments}</Td>
               </Tr>
