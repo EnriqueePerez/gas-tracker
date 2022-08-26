@@ -12,6 +12,7 @@ import {
   AcceptInviteModal,
   InvitesMenu,
   Layout,
+  UserOptionsMenu,
 } from '../../components/elements';
 import {
   ICreateTankFormValues,
@@ -38,7 +39,7 @@ export const HomePage = (): JSX.Element => {
   const { getTanks, postTank, tanks } = useTanks();
   const { getTransferInvite, patchSendedTank } = useSendedTanks();
   const { data: user } = useUser();
-  const { login } = useFirebaseLogin();
+  const { login, logout } = useFirebaseLogin();
   const toast = useToast();
 
   const handleCreateTank = async (v: ICreateTankFormValues) => {
@@ -89,6 +90,12 @@ export const HomePage = (): JSX.Element => {
     [login],
   );
 
+  const handleLogout = useCallback(async () => {
+    await logout();
+    const description = 'Sesión cerrada exitosamente.';
+    toast({ description, status: 'success' });
+  }, [logout]);
+
   useEffect(() => {
     fetchTransferInvites();
     getTanks();
@@ -117,6 +124,13 @@ export const HomePage = (): JSX.Element => {
         isOpen={isOpen}
         onClose={onClose}
         onSubmit={handleCreateTank}
+      />
+
+      <UserOptionsMenu
+        handleLogout={handleLogout}
+        position="absolute"
+        right={28}
+        top={4}
       />
 
       <InvitesMenu
