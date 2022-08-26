@@ -1,4 +1,4 @@
-import { Box, Heading, useToast } from '@chakra-ui/react';
+import { Box, Heading, Image, Text, useToast } from '@chakra-ui/react';
 import { useCallback } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useSigninCheck } from 'reactfire';
@@ -33,8 +33,12 @@ export const LoginPage = (): JSX.Element => {
 
   return (
     <Box alignItems="center" display="flex" flexDir="column" px={4} py={20}>
-      <Heading fontSize="1.75rem" mb={6}>
-        Inicia Sesión
+      <Image mb={6} src="logo192.png" width="8em" />
+      <Heading fontSize="1.75rem" mb={6} textAlign="center">
+        Trackeador de Boyas <br />
+        <Text fontSize="1rem" fontStyle="italic" fontWeight="normal">
+          by Termoconfort
+        </Text>
       </Heading>
 
       <LoginForm

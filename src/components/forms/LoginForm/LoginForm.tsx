@@ -28,7 +28,12 @@ export const LoginForm = (props: ILoginFormProps) => {
         <Box as={Form} {...rest}>
           <InputField label="Email" mb={4} name="email" type="email" />
 
-          <InputField label="Password" mb={6} name="password" type="password" />
+          <InputField
+            label="Contraseña"
+            mb={6}
+            name="password"
+            type="password"
+          />
 
           <Button
             colorScheme="facebook"
