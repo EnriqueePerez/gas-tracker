@@ -10,5 +10,21 @@ export type ICreateTankFormValues = Pick<
 export const ValidationSchema = Yup.object().shape({
   id: Yup.string().required(),
   refrigerant: Yup.string().required(),
-  tank_weight: Yup.number().min(10).required(),
+  tank_weight: Yup.number()
+    .required()
+    .when('refrigerant', (refrigerant, field) => {
+      switch (refrigerant) {
+        case 'R22':
+          return field.min(13.6, 'No puede ser menor a 13.6');
+        case 'R404':
+          return field.min(10.89, 'No puede ser menor a 10.89');
+        case 'R134':
+          return field.min(13.62, 'No puede ser menor a 13.62');
+        case 'R410':
+        case 'R449':
+          return field.min(11.35, 'No puede ser menor a 11.35');
+        default:
+          return field.min(0, 'No puede ser menor a 0');
+      }
+    }),
 });
