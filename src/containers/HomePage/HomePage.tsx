@@ -111,10 +111,10 @@ export const HomePage = (): JSX.Element => {
           alignSelf="end"
           colorScheme="green"
           onClick={onOpen}
-          px={12}
+          px={5}
           size="sm"
         >
-          Create
+          Registrar Boya
         </Button>
       </Stack>
 
