@@ -1,6 +1,7 @@
 import { Box, BoxProps, Button } from '@chakra-ui/react';
 import { Form, Formik, FormikHelpers } from 'formik';
 
+import { IStore } from '../../../hooks/useStores';
 import { ITank } from '../../../hooks/useTanks';
 import { InputField, SelectField, TextAreaField } from '../../inputs';
 import { ICreateGasDischargeFormValues, ValidationSchema } from './helpers';
@@ -25,6 +26,10 @@ export interface ICreateGasDischargeFormProps
    */
   tank?: ITank;
   /**
+   * Store options.
+   */
+  stores?: IStore[];
+  /**
    * Create Gas Discharge form on submit handler.
    */
   onSubmit: (
@@ -34,7 +39,7 @@ export interface ICreateGasDischargeFormProps
 }
 
 export const CreateGasDischargeForm = (props: ICreateGasDischargeFormProps) => {
-  const { tank, initialValues, onSubmit, ...rest } = props;
+  const { initialValues, tank, stores, onSubmit, ...rest } = props;
 
   return (
     <Formik
@@ -57,13 +62,9 @@ export const CreateGasDischargeForm = (props: ICreateGasDischargeFormProps) => {
           />
 
           <InputField
-            datalist={[
-              'Coatzacoalcos',
-              'Pajaritos',
-              'Cardel',
-              'Emiliano Zapata',
-            ]}
+            datalist={stores?.map((store) => store.name as string)}
             helperText="En caso de no encontrar la tienda en la lista, agreguela"
+            inputList="stores"
             label="Tienda"
             mb={4}
             name="store"
@@ -138,5 +139,6 @@ CreateGasDischargeForm.defaultProps = {
     tank_id: '',
     timedate_of_start: '',
   },
+  stores: [],
   tank: {},
 };

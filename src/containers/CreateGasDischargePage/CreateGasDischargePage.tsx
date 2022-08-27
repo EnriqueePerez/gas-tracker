@@ -1,4 +1,5 @@
 import { Heading, useToast } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useUser } from 'reactfire';
 
@@ -9,10 +10,12 @@ import {
 } from '../../components/forms';
 import { getCurrentDate } from '../../helpers';
 import { IGasDischarge, useGasDischarges } from '../../hooks/useGasDischarges';
+import { useStores } from '../../hooks/useStores';
 import { ITank } from '../../hooks/useTanks';
 
 export const CreateGasDischargePage = (): JSX.Element => {
   const { postGasDischarge } = useGasDischarges();
+  const { getStores, stores } = useStores();
   const { data: user } = useUser();
 
   const location = useLocation();
@@ -41,6 +44,13 @@ export const CreateGasDischargePage = (): JSX.Element => {
     }
   };
 
+  useEffect(() => {
+    const fetchStores = async () => {
+      await getStores();
+    };
+    fetchStores();
+  }, []);
+
   return (
     <Layout>
       <Heading mb="10">Nueva descarga de gas</Heading>
@@ -50,6 +60,7 @@ export const CreateGasDischargePage = (): JSX.Element => {
 
       <CreateGasDischargeForm
         onSubmit={handleOnSubmit}
+        stores={stores}
         tank={(location.state as { tank: ITank }).tank}
         width={{ base: '100%', lg: '800px' }}
       />
