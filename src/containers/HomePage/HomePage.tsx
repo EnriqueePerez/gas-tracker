@@ -51,11 +51,16 @@ export const HomePage = (): JSX.Element => {
       tank_weight: v.tank_weight,
     };
     try {
-      await postTank(newTank);
-      const description = 'Boya creada exitosamente.';
-      toast({ description, status: 'success' });
-      await getTanks();
-      onClose();
+      if (tanks?.find((t) => t.id === newTank.id)) {
+        const description = 'Ya existe una boya con este ID.';
+        toast({ description, status: 'error' });
+      } else {
+        await postTank(newTank);
+        const description = 'Boya creada exitosamente.';
+        toast({ description, status: 'success' });
+        await getTanks();
+        onClose();
+      }
     } catch (error) {
       console.log('hubo un error', error);
       const description = 'Hubo un error al registrar la boya.';
