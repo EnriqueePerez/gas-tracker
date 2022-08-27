@@ -99,7 +99,7 @@ export const CreateGasDischargeForm = (props: ICreateGasDischargeFormProps) => {
 
           <InputField
             helperText="Peso de la boya luego de cargar el gas al equipo, en kilos"
-            label="Peso actual de la boya (kg)"
+            label="Peso despues de la descarga (kg)"
             mb={4}
             name="actual_tank_weight"
             type="number"

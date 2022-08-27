@@ -29,6 +29,9 @@ export const TankInfoPage = (): JSX.Element => {
   return (
     <Layout>
       <Heading>Detalles de la boya</Heading>
+      <Heading size="sm">
+        Boya: {(state as { tank_id: string })?.tank_id}
+      </Heading>
 
       <Box mt={8} overflow="scroll" w="100%">
         <Table size="sm" variant="simple">
