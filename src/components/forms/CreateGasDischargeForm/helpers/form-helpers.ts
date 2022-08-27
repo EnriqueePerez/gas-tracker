@@ -91,8 +91,14 @@ export const ValidationSchema = (
             return field.min(0, 'El valor no puede ser menor a 0');
         }
       }),
+    comentarios: Yup.string().optional().default(''),
+    folio: Yup.string().required('El folio es requerido'),
+    store: Yup.string().required('La tienda es requerida'),
+    timedate_of_start: Yup.string().required('La hora de inicio es requerida'),
+    unit: Yup.string().required('La unidad es requerida'),
+
     // TODO: add left validations
+
     // new_owner_name: Yup.string().required(),
     // tank_id: Yup.string().required(),
-    unit: Yup.string().required(),
   });
