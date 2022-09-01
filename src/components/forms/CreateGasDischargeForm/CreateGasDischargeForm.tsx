@@ -86,6 +86,9 @@ export const CreateGasDischargeForm = (props: ICreateGasDischargeFormProps) => {
               'Vitrina',
               'Imbera',
               'Enfriador de Corona',
+              'Clima 1',
+              'Clima 2',
+              'Clima 3',
             ]}
             placeholder="Seleccione el equipo"
           />

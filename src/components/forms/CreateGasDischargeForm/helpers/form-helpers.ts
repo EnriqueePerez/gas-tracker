@@ -47,7 +47,10 @@ export const ValidationSchema = (
               .min(minWeight, `No puede ser menor a ${minWeight}`)
               .max(tankWeight, `No puede ser mayor a ${tankWeight}`);
           }
-          case 'Conservación 2': {
+          case 'Conservación 2':
+          case 'Clima 1':
+          case 'Clima 2':
+          case 'Clima 3': {
             let minWeight = tankWeight - 5;
             if (minWeight <= 0) {
               minWeight = initialWeight - gasWeight();
@@ -79,7 +82,7 @@ export const ValidationSchema = (
           case 'Vitrina':
           case 'Imbera':
           case 'Enfriador de Corona': {
-            let minWeight = tankWeight - 0.5;
+            let minWeight = tankWeight - 0.9;
             if (minWeight <= 0) {
               minWeight = initialWeight - gasWeight();
             }
