@@ -12,6 +12,6 @@ export interface ILoginFormValues {
 }
 
 export const ValidationSchema = Yup.object().shape({
-  email: Yup.string().email().required(),
-  password: Yup.string().required(),
+  email: Yup.string().email().required('El correo es requerido'),
+  password: Yup.string().required('La contraseña es requerida'),
 });
