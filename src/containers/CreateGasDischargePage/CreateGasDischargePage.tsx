@@ -26,13 +26,14 @@ export const CreateGasDischargePage = (): JSX.Element => {
 
   const handleOnSubmit = async (v: ICreateGasDischargeFormValues) => {
     const tank_id = (location.state as { tank_id: string })?.tank_id;
-    const payload: IGasDischarge = {
-      ...v,
-      owner_name: user?.displayName as string,
-      tank_id,
-      timedate_of_start: getCurrentDate(v.timedate_of_start),
-    };
     try {
+      const payload: IGasDischarge = {
+        ...v,
+        owner_name: user?.displayName as string,
+        tank_id,
+        timedate_of_start: getCurrentDate(v.timedate_of_start),
+      };
+
       await postGasDischarge(payload, tank_id);
       const description = 'El registro fue creado exitosamente.';
       toast({ description, status: 'success' });
