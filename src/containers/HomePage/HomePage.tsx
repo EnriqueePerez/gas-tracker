@@ -14,6 +14,7 @@ import {
   Layout,
   UserOptionsMenu,
 } from '../../components/elements';
+import { SparesSectionButton } from '../../components/elements/SparesSection/SparesSectionButton';
 import {
   ICreateTankFormValues,
   ILoginFormValues,
@@ -112,15 +113,17 @@ export const HomePage = (): JSX.Element => {
       <Stack isInline justify="space-between" w="100%">
         <Heading>Gas Tracker</Heading>
 
-        <Button
-          alignSelf="end"
-          colorScheme="green"
-          onClick={onOpen}
-          px={5}
-          size="sm"
-        >
-          Registrar Boya
-        </Button>
+        <Stack isInline spacing={4}>
+          <Button
+            alignSelf="end"
+            colorScheme="green"
+            onClick={onOpen}
+            px={5}
+            size="sm"
+          >
+            Registrar Boya
+          </Button>
+        </Stack>
       </Stack>
 
       <TankListing mt={8} tanks={tanks} w="100%" />
@@ -130,6 +133,8 @@ export const HomePage = (): JSX.Element => {
         onClose={onClose}
         onSubmit={handleCreateTank}
       />
+
+      <SparesSectionButton />
 
       <UserOptionsMenu
         handleLogout={handleLogout}
