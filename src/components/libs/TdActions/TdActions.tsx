@@ -1,24 +1,28 @@
 import { IconButton, Stack, StackProps, Td } from '@chakra-ui/react';
 import { BiTransfer } from 'react-icons/bi';
-import { FaInfo, FaPlus } from 'react-icons/fa';
+import { FaInfo, FaPlus, FaUpload } from 'react-icons/fa';
 
 export interface ITdActionsProps extends StackProps {
   /**
    * Redirects to the detail page of the tank.
    */
-  onInfo: () => void;
+  onInfo?: () => void;
   /**
    * Redirects to the transfer page.
    */
-  onTransfer: () => void;
+  onTransfer?: () => void;
   /**
    * Redirects to the add discharge page.
    */
-  onNewRegistry: () => void;
+  onNewRegistry?: () => void;
+  /**
+   * Redirects to the update spare page.
+   */
+  onUpdateSpare?: () => void;
 }
 
 export const TdActions: React.FC<ITdActionsProps> = (props): JSX.Element => {
-  const { onInfo, onTransfer, onNewRegistry, ...rest } = props;
+  const { onInfo, onTransfer, onNewRegistry, onUpdateSpare, ...rest } = props;
 
   return (
     <Stack as={Td} {...rest}>
@@ -48,6 +52,16 @@ export const TdActions: React.FC<ITdActionsProps> = (props): JSX.Element => {
           colorScheme="green"
           icon={<FaPlus />}
           onClick={onNewRegistry}
+          size="sm"
+        />
+      ) : null}
+
+      {onUpdateSpare ? (
+        <IconButton
+          aria-label="update-spare"
+          colorScheme="green"
+          icon={<FaUpload />}
+          onClick={onUpdateSpare}
           size="sm"
         />
       ) : null}

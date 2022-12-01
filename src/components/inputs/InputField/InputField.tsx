@@ -43,6 +43,10 @@ export interface IInputFieldProps extends FormControlProps {
    * Input type, default is `text`.
    */
   type?: string;
+  /**
+   * Default value, this property is optional.
+   */
+  value?: string;
 }
 
 export const InputField = (props: IInputFieldProps): JSX.Element => {
@@ -112,4 +116,5 @@ InputField.defaultProps = {
   placeholder: undefined,
   size: 'sm',
   type: 'text',
+  value: undefined,
 };

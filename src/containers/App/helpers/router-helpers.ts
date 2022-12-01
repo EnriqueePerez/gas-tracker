@@ -1,8 +1,10 @@
 import { CreateGasDischargePage } from '../../CreateGasDischargePage';
 import { CreateTankPage } from '../../CreateTankPage';
 import { HomePage } from '../../HomePage';
+import { SparesInfoPage } from '../../SparesInfoPage';
 import { TankInfoPage } from '../../TankInfoPage';
 import { TransferTankPage } from '../../TransferTankPage';
+import { UpdateSparePage } from '../../UpdateSparePage';
 
 export const ROUTES = [
   {
@@ -24,5 +26,13 @@ export const ROUTES = [
   {
     element: TankInfoPage,
     path: '/tank-info',
+  },
+  {
+    element: SparesInfoPage,
+    path: '/spares',
+  },
+  {
+    element: UpdateSparePage,
+    path: '/update-spare',
   },
 ];
