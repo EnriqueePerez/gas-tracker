@@ -109,6 +109,14 @@ export const CreateGasDischargeForm = (props: ICreateGasDischargeFormProps) => {
             type="number"
           />
 
+          <InputField
+            helperText="El registro de la foto de la descarga"
+            label="Registro de la foto"
+            mb={4}
+            name="register_of_photo"
+            type="text"
+          />
+
           <TextAreaField
             label="Comentarios"
             mb={4}
@@ -138,6 +146,7 @@ CreateGasDischargeForm.defaultProps = {
     comments: '',
     folio: '',
     owner_name: '',
+    register_of_photo: '',
     store: '',
     tank_id: '',
     timedate_of_start: '',

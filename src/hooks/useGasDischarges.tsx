@@ -11,6 +11,7 @@ export interface IGasDischarge {
   owner_name: string;
   store: string;
   folio: string;
+  register_of_photo?: string;
 }
 
 export const useGasDischarges = () => {

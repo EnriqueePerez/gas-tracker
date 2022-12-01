@@ -32,6 +32,9 @@ export const TankInfoPage = (): JSX.Element => {
       <Heading size="sm">
         Boya: {(state as { tank_id: string })?.tank_id}
       </Heading>
+      <Heading size="sm">
+        Peso Inicial: {(state as { initial_weight: number })?.initial_weight}
+      </Heading>
 
       <Box mt={8} overflow="scroll" w="100%">
         <Table size="sm" variant="simple">
@@ -49,6 +52,7 @@ export const TankInfoPage = (): JSX.Element => {
                 <Td>{gd?.owner_name}</Td>
                 <Td>{gd?.store}</Td>
                 <Td>{gd?.actual_tank_weight}</Td>
+                <Td>{gd?.register_of_photo || 'S/D'}</Td>
                 <Td>{new Date(gd?.timedate_of_start).toLocaleString()}</Td>
                 <Td>{new Date(gd?.timedate as string).toLocaleString()}</Td>
                 <Td>{gd?.comments}</Td>

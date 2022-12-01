@@ -11,6 +11,7 @@ export type ICreateGasDischargeFormValues = Pick<
   | 'store'
   | 'folio'
   | 'tank_id'
+  | 'register_of_photo'
 >;
 
 export const ValidationSchema = (
@@ -96,6 +97,7 @@ export const ValidationSchema = (
       }),
     comentarios: Yup.string().optional().default(''),
     folio: Yup.string().required('El folio es requerido'),
+    register_of_photo: Yup.string().required('El registro es requerido'),
     store: Yup.string().required('La tienda es requerida'),
     timedate_of_start: Yup.string().required('La hora de inicio es requerida'),
     unit: Yup.string().required('La unidad es requerida'),

@@ -84,7 +84,12 @@ export const TankListing: React.FC<ITankListingProps> = (
               </Td>
               <TdActions
                 onInfo={() =>
-                  navigate('/tank-info', { state: { tank_id: tank?.id } })
+                  navigate('/tank-info', {
+                    state: {
+                      initial_weight: tank?.initial_weight,
+                      tank_id: tank?.id,
+                    },
+                  })
                 }
                 onNewRegistry={() => handleOnNewRegistry(tank)}
                 onTransfer={() => handleOnTransfer(tank)}
