@@ -1,6 +1,6 @@
 export const HEADERS = [
   'Tienda',
-  'Registrador de la refacción',
+  'Solicitante',
   'Folio',
   'Refacción',
   'Equipo',

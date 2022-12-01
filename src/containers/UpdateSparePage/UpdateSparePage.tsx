@@ -59,6 +59,7 @@ export const UpdateSparePage = (): JSX.Element => {
           0,
           10,
         ) || '',
+      supplier: (location.state as { spare: ISpare }).spare.supplier,
     }),
     [location.state],
   );

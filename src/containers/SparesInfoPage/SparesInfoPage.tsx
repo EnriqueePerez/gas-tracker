@@ -23,16 +23,15 @@ export const SparesInfoPage = (): JSX.Element => {
   const navigate = useNavigate();
 
   const handleRegisterSpare = async (v: IRegisterSpareFormValues) => {
-    const newTank: ISpare = {
+    const newSpare: ISpare = {
       folio: v.folio,
       name: v.name,
       registrant_name: user?.displayName as string,
       store: v.store,
-      supplier: v.supplier,
       unit: v.unit,
     };
     try {
-      await postSpare(newTank);
+      await postSpare(newSpare);
       const description = 'Refacción registrada exitosamente.';
       toast({ description, status: 'success' });
       await getSpares();

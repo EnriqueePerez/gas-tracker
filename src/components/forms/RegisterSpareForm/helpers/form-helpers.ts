@@ -4,7 +4,7 @@ import { ISpare } from '../../../../hooks/useSpares';
 
 export type IRegisterSpareFormValues = Pick<
   ISpare,
-  'name' | 'folio' | 'store' | 'unit' | 'store_manager' | 'supplier'
+  'name' | 'folio' | 'store' | 'unit' | 'store_manager'
 >;
 
 export const ValidationSchema = Yup.object().shape({
@@ -14,6 +14,5 @@ export const ValidationSchema = Yup.object().shape({
   store_manager: Yup.string().required(
     'El encargado de la tienda es requerido',
   ),
-  supplier: Yup.string().required('El proveedor es requerido'),
   unit: Yup.string().required('La unidad es requerida'),
 });

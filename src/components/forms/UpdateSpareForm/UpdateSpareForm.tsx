@@ -26,6 +26,7 @@ export const UpdateSpareForm = (props: IUpdateSpareFormProps) => {
     reception_date,
     authorization_date,
     installation_date,
+    supplier,
   } = initialValues;
 
   return (
@@ -36,6 +37,15 @@ export const UpdateSpareForm = (props: IUpdateSpareFormProps) => {
     >
       {({ isSubmitting, isValid }) => (
         <Box as={Form} {...rest}>
+          <InputField
+            helperText="Proveedor de la refacción"
+            isDisabled={!!supplier}
+            label="Proveedor"
+            mb={4}
+            name="supplier"
+            type="text"
+          />
+
           <InputField
             helperText="Fecha en la que se solicito la refacción"
             isDisabled={!!request_date}

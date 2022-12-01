@@ -57,7 +57,7 @@ export const SparesListing: React.FC<ISparesListingProps> = (
               <Td>{spare?.folio}</Td>
               <Td>{spare?.name}</Td>
               <Td>{spare?.unit}</Td>
-              <Td>{spare?.supplier}</Td>
+              <Td>{spare.supplier ? spare.supplier : 'S/D'}</Td>
               <Td>
                 {spare.created_at
                   ? new Date(spare?.created_at).toLocaleDateString()

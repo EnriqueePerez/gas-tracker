@@ -13,7 +13,7 @@ export interface ISpare {
   request_date?: string;
   store_manager?: string;
   authorization_date?: string;
-  supplier: string;
+  supplier?: string;
   reception_date?: string;
   installation_date?: string;
 }

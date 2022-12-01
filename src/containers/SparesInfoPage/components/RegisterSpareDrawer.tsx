@@ -11,12 +11,13 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import { FormikHelpers, FormikProps } from 'formik';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 import {
   IRegisterSpareFormValues,
   RegisterSpareForm,
 } from '../../../components/forms';
+import { useStores } from '../../../hooks/useStores';
 
 export interface IRegisterSpareDrawerProps
   extends Omit<DrawerProps, 'children'> {
@@ -33,8 +34,16 @@ export const RegisterSpareDrawer = (
   props: IRegisterSpareDrawerProps,
 ): JSX.Element => {
   const { onSubmit, onClose, placement = 'right', ...rest } = props;
+  const { getStores, stores } = useStores();
 
   const ref = useRef<FormikProps<IRegisterSpareFormValues>>(null);
+
+  useEffect(() => {
+    const fetchStores = async () => {
+      await getStores();
+    };
+    fetchStores();
+  }, []);
 
   return (
     <Drawer onClose={onClose} placement={placement} {...rest}>
@@ -44,7 +53,7 @@ export const RegisterSpareDrawer = (
         <DrawerHeader>Nueva Refacción</DrawerHeader>
 
         <DrawerBody>
-          <RegisterSpareForm ref={ref} onSubmit={onSubmit} />
+          <RegisterSpareForm ref={ref} onSubmit={onSubmit} stores={stores} />
         </DrawerBody>
 
         <DrawerFooter as={Stack}>

@@ -2,6 +2,7 @@ import { Box, BoxProps, Button } from '@chakra-ui/react';
 import { Form, Formik, FormikHelpers, FormikProps } from 'formik';
 import { forwardRef } from 'react';
 
+import { IStore } from '../../../hooks/useStores';
 import { InputField, SelectField } from '../../inputs';
 import { IRegisterSpareFormValues, ValidationSchema } from './helpers';
 
@@ -21,13 +22,17 @@ export interface IRegisterSpareFormProps extends Omit<BoxProps, 'onSubmit'> {
    * If `true`, the submit button will be rendered on the form.
    */
   showSubmitButton?: boolean;
+  /**
+   * Store options.
+   */
+  stores?: IStore[];
 }
 
 export const RegisterSpareForm = forwardRef<
   FormikProps<IRegisterSpareFormValues>,
   IRegisterSpareFormProps
 >((props, ref) => {
-  const { initialValues, onSubmit, showSubmitButton, ...rest } = props;
+  const { initialValues, onSubmit, showSubmitButton, stores, ...rest } = props;
 
   return (
     <Formik
@@ -55,7 +60,9 @@ export const RegisterSpareForm = forwardRef<
           />
 
           <InputField
+            datalist={stores?.map((store) => store.name as string)}
             helperText="Tienda que necesita la refacción"
+            inputList="stores"
             label="Tienda"
             mb={4}
             name="store"
@@ -88,16 +95,11 @@ export const RegisterSpareForm = forwardRef<
               'Clima 1',
               'Clima 2',
               'Clima 3',
+              'Platina',
+              'Sistema',
+              'N/A',
             ]}
             placeholder="Seleccione el equipo"
-          />
-
-          <InputField
-            helperText="Proveedor de la refacción"
-            label="Proveedor"
-            mb={4}
-            name="supplier"
-            type="text"
           />
 
           {showSubmitButton ? (
@@ -124,10 +126,10 @@ RegisterSpareForm.defaultProps = {
     name: '',
     store: '',
     store_manager: '',
-    supplier: '',
     unit: '',
   },
   showSubmitButton: false,
+  stores: [],
 };
 
 RegisterSpareForm.displayName = 'RegisterSpareForm';
