@@ -55,7 +55,9 @@ export const SparesListing: React.FC<ISparesListingProps> = (
               <Td>{spare?.store}</Td>
               <Td>{spare?.registrant_name}</Td>
               <Td>{spare?.folio}</Td>
-              <Td>{spare?.name}</Td>
+              <Td minWidth="300px" whiteSpace="pre-wrap">
+                {spare?.name}
+              </Td>
               <Td>{spare?.unit}</Td>
               <Td>{spare.supplier ? spare.supplier : 'S/D'}</Td>
               <Td>
