@@ -85,6 +85,7 @@ export const SparesListing: React.FC<ISparesListingProps> = (
                   ? new Date(spare?.installation_date).toLocaleDateString()
                   : 'S/D'}
               </Td>
+              <Td>{spare.service_sheet ? 'Si' : 'S/D'}</Td>
               <TdActions onUpdateSpare={() => handleOnUpdate(spare)} />
             </Tr>
           </Tbody>

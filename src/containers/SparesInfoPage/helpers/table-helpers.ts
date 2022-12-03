@@ -10,4 +10,5 @@ export const HEADERS = [
   'Fecha de autorización',
   'Fecha de recepción',
   'Fecha de instalación',
+  'Hoja de servicio',
 ];

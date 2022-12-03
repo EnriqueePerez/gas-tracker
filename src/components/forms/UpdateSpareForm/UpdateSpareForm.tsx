@@ -1,7 +1,8 @@
 import { Box, BoxProps, Button } from '@chakra-ui/react';
 import { Form, Formik, FormikHelpers } from 'formik';
+import fp from 'lodash/fp';
 
-import { InputField } from '../../inputs';
+import { FileField, InputField } from '../../inputs';
 import { IUpdateSpareFormValues, ValidationSchema } from './helpers';
 
 export interface IUpdateSpareFormProps extends Omit<BoxProps, 'onSubmit'> {
@@ -27,15 +28,17 @@ export const UpdateSpareForm = (props: IUpdateSpareFormProps) => {
     authorization_date,
     installation_date,
     supplier,
+    service_sheet,
   } = initialValues;
 
   return (
     <Formik
+      enableReinitialize
       initialValues={initialValues as IUpdateSpareFormValues}
       onSubmit={onSubmit}
       validationSchema={ValidationSchema}
     >
-      {({ isSubmitting, isValid }) => (
+      {({ isSubmitting, isValid, values }) => (
         <Box as={Form} {...rest}>
           <InputField
             helperText="Proveedor de la refacción"
@@ -82,16 +85,32 @@ export const UpdateSpareForm = (props: IUpdateSpareFormProps) => {
             type="date"
           />
 
-          <Button
-            colorScheme="facebook"
-            isDisabled={isSubmitting || !isValid}
-            isLoading={isSubmitting}
-            size="sm"
-            type="submit"
-            width="100%"
-          >
-            Actualizar refacción
-          </Button>
+          {!service_sheet ? (
+            <FileField
+              helperText="Foto de la hoja de servicio"
+              label="Hoja de servicio"
+              mb={4}
+              name="service_sheet"
+            />
+          ) : null}
+
+          {fp.compose(
+            fp.size,
+            fp.omitBy((v) => !fp.isNil(v) && !fp.isEmpty(v)),
+            fp.values,
+            fp.omit(['service_sheet']),
+          )(values) || !service_sheet ? (
+            <Button
+              colorScheme="facebook"
+              isDisabled={isSubmitting || !isValid}
+              isLoading={isSubmitting}
+              size="sm"
+              type="submit"
+              width="100%"
+            >
+              Actualizar refacción
+            </Button>
+          ) : null}
         </Box>
       )}
     </Formik>

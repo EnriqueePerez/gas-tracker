@@ -16,6 +16,7 @@ export interface ISpare {
   supplier?: string;
   reception_date?: string;
   installation_date?: string;
+  service_sheet?: string | Blob;
 }
 
 export const useSpares = () => {
@@ -32,6 +33,21 @@ export const useSpares = () => {
       .then((res) => res.json())
       .catch((err) => console.log(err));
 
+  const postServiceSheet = (
+    serviceSheet: File,
+    spare_id: string,
+    contentType: string,
+  ) =>
+    fetch(`${env.API_URL}/spares/${spare_id}/service-sheet`, {
+      body: serviceSheet,
+      headers: {
+        'Content-Type': contentType,
+      },
+      method: 'POST',
+    })
+      .then((res) => res.json())
+      .catch((err) => console.log(err));
+
   const getSpares = () =>
     fetch(`${env.API_URL}/spares`)
       .then((res) => res.json())
@@ -39,6 +55,12 @@ export const useSpares = () => {
         setSpares(data);
         return data;
       })
+      .catch((err) => console.log(err));
+
+  const getServiceSheet = (spare_id: string) =>
+    fetch(`${env.API_URL}/spares/${spare_id}/service-sheet`)
+      .then((res) => res.blob())
+      .then((file) => file)
       .catch((err) => console.log(err));
 
   const patchSpare = (spare: Partial<ISpare>, spare_id: string) =>
@@ -53,8 +75,10 @@ export const useSpares = () => {
       .catch((err) => console.log(err));
 
   return {
+    getServiceSheet,
     getSpares,
     patchSpare,
+    postServiceSheet,
     postSpare,
     spares,
   };

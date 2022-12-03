@@ -12,9 +12,9 @@ import {
   AcceptInviteModal,
   InvitesMenu,
   Layout,
+  SparesSectionButton,
   UserOptionsMenu,
 } from '../../components/elements';
-import { SparesSectionButton } from '../../components/elements/SparesSection/SparesSectionButton';
 import {
   ICreateTankFormValues,
   ILoginFormValues,
