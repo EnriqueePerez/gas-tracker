@@ -38,6 +38,7 @@ export const UpdateSparePage = (): JSX.Element => {
         reception_date: v.reception_date,
         request_date: v.request_date,
         service_sheet: service_sheet ? 'Si' : undefined,
+        supplier: v.supplier,
       };
 
       await patchSpare(payload, spare_id as string);
