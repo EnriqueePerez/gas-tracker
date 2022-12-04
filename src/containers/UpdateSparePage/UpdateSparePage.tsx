@@ -91,6 +91,9 @@ export const UpdateSparePage = (): JSX.Element => {
   return (
     <Layout>
       <Heading mb="5">Actualizar refacción</Heading>
+      <Heading mb="5" size="sm" textAlign="center">
+        Tienda: {(location.state as { spare: ISpare }).spare.store}
+      </Heading>
       <Heading mb="10" size="sm" textAlign="center">
         Refacción: {(location.state as { spare: ISpare }).spare.name}
       </Heading>

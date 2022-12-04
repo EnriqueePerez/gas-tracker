@@ -17,6 +17,7 @@ export interface ISpare {
   reception_date?: string;
   installation_date?: string;
   service_sheet?: string | Blob;
+  is_delayed?: boolean | string;
 }
 
 export const useSpares = () => {

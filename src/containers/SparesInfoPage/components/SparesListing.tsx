@@ -39,6 +39,16 @@ export const SparesListing: React.FC<ISparesListingProps> = (
     [user],
   );
 
+  const setColor = useCallback(
+    (spare: ISpare) => {
+      if (spare.is_delayed === 'Sí') {
+        return 'red.500';
+      }
+      return 'unset';
+    },
+    [user],
+  );
+
   return (
     <Box overflow="scroll" w="100%" {...rest}>
       <Table size="sm" variant="simple">
@@ -55,7 +65,11 @@ export const SparesListing: React.FC<ISparesListingProps> = (
               <Td>{spare?.store}</Td>
               <Td>{spare?.registrant_name}</Td>
               <Td>{spare?.folio}</Td>
-              <Td minWidth="300px" whiteSpace="pre-wrap">
+              <Td
+                color={setColor(spare)}
+                minWidth="300px"
+                whiteSpace="pre-wrap"
+              >
                 {spare?.name}
               </Td>
               <Td>{spare?.unit}</Td>

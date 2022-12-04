@@ -45,7 +45,7 @@ export const RegisterSpareForm = forwardRef<
         <Box as={Form} id="create-tank-form" {...rest}>
           <InputField
             helperText="Nombre de la refacción"
-            label="Nombre"
+            label="Refacción"
             mb={4}
             name="name"
             type="text"
@@ -102,6 +102,14 @@ export const RegisterSpareForm = forwardRef<
             placeholder="Seleccione el equipo"
           />
 
+          <SelectField
+            helperText="Seleccione si la refacción es rezagada"
+            label="¿La refacción es rezagada?"
+            mb={4}
+            name="is_delayed"
+            options={['No', 'Sí']}
+          />
+
           {showSubmitButton ? (
             <Button
               colorScheme="facebook"
@@ -123,6 +131,7 @@ export const RegisterSpareForm = forwardRef<
 RegisterSpareForm.defaultProps = {
   initialValues: {
     folio: '',
+    is_delayed: 'No',
     name: '',
     store: '',
     store_manager: '',

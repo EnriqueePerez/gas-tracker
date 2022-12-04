@@ -25,6 +25,7 @@ export const SparesInfoPage = (): JSX.Element => {
   const handleRegisterSpare = async (v: IRegisterSpareFormValues) => {
     const newSpare: ISpare = {
       folio: v.folio,
+      is_delayed: v.is_delayed,
       name: v.name,
       registrant_name: user?.displayName as string,
       store: v.store,
