@@ -28,6 +28,7 @@ export const SparesInfoPage = (): JSX.Element => {
       name: v.name,
       registrant_name: user?.displayName as string,
       store: v.store,
+      store_manager: v.store_manager,
       unit: v.unit,
     };
     try {

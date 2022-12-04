@@ -4,6 +4,7 @@ export const HEADERS = [
   'Folio',
   'Refacción',
   'Equipo',
+  'Encargado de la tienda',
   'Proveedor',
   'Fecha de registro',
   'Fecha de solicitud',

@@ -59,6 +59,7 @@ export const SparesListing: React.FC<ISparesListingProps> = (
                 {spare?.name}
               </Td>
               <Td>{spare?.unit}</Td>
+              <Td>{spare?.store_manager}</Td>
               <Td>{spare.supplier ? spare.supplier : 'S/D'}</Td>
               <Td>
                 {spare.created_at
