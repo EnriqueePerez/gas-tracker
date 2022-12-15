@@ -73,7 +73,7 @@ export const SparesListing: React.FC<ISparesListingProps> = (
                 {spare?.name}
               </Td>
               <Td>{spare?.unit}</Td>
-              <Td>{spare?.store_manager}</Td>
+              <Td>{spare.store_manager ? spare.store_manager : 'S/D'}</Td>
               <Td>{spare.supplier ? spare.supplier : 'S/D'}</Td>
               <Td>
                 {spare.created_at
@@ -105,6 +105,13 @@ export const SparesListing: React.FC<ISparesListingProps> = (
             </Tr>
           </Tbody>
         ))}
+        <Thead position="sticky" top={0}>
+          <Tr>
+            {HEADERS.map((item) => (
+              <Th key={nanoid()}>{item}</Th>
+            ))}
+          </Tr>
+        </Thead>
         <TableCaption>Refacciones</TableCaption>
       </Table>
     </Box>

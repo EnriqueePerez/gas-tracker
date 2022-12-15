@@ -29,6 +29,7 @@ export const UpdateSpareForm = (props: IUpdateSpareFormProps) => {
     installation_date,
     supplier,
     service_sheet,
+    store_manager,
   } = initialValues;
 
   return (
@@ -40,6 +41,15 @@ export const UpdateSpareForm = (props: IUpdateSpareFormProps) => {
     >
       {({ isSubmitting, isValid, values }) => (
         <Box as={Form} {...rest}>
+          <InputField
+            helperText="Encargado de la tienda"
+            isDisabled={!!store_manager}
+            label="Encargado de la tienda"
+            mb={4}
+            name="store_manager"
+            type="text"
+          />
+
           <InputField
             helperText="Proveedor de la refacción"
             isDisabled={!!supplier}

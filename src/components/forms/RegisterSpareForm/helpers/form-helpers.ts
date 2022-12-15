@@ -12,8 +12,5 @@ export const ValidationSchema = Yup.object().shape({
   is_delayed: Yup.string().required('El estatus es requerido'),
   name: Yup.string().required('El nombre es requerido'),
   store: Yup.string().required('La tienda es requerida'),
-  store_manager: Yup.string().required(
-    'El encargado de la tienda es requerido',
-  ),
   unit: Yup.string().required('La unidad es requerida'),
 });

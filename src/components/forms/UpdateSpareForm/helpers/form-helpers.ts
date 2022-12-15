@@ -11,6 +11,7 @@ export type IUpdateSpareFormValues = Pick<
   | 'installation_date'
   | 'supplier'
   | 'service_sheet'
+  | 'store_manager'
 >;
 
 const isValidFileSize = fp.curry(
@@ -38,5 +39,6 @@ export const ValidationSchema = Yup.object().shape({
       if (fp.isString(v)) return true;
       return isValidFileFormat(v.type);
     }),
+  store_manager: Yup.string(),
   supplier: Yup.string(),
 });

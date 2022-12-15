@@ -38,6 +38,7 @@ export const UpdateSparePage = (): JSX.Element => {
         reception_date: v.reception_date,
         request_date: v.request_date,
         service_sheet: service_sheet ? 'Si' : undefined,
+        store_manager: v.store_manager,
         supplier: v.supplier,
       };
 
@@ -79,6 +80,7 @@ export const UpdateSparePage = (): JSX.Element => {
           10,
         ) || '',
       service_sheet: serviceSheet,
+      store_manager: (location.state as { spare: ISpare }).spare.store_manager,
       supplier: (location.state as { spare: ISpare }).spare.supplier,
     }),
     [location.state, serviceSheet],

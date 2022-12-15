@@ -69,14 +69,6 @@ export const RegisterSpareForm = forwardRef<
             type="text"
           />
 
-          <InputField
-            helperText="Encargado de la tienda"
-            label="Encargado"
-            mb={4}
-            name="store_manager"
-            type="text"
-          />
-
           <SelectField
             helperText="Equipo que requiere la refacción"
             label="Equipo"
