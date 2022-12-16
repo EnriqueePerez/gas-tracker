@@ -41,10 +41,15 @@ export const SparesListing: React.FC<ISparesListingProps> = (
 
   const setColor = useCallback(
     (spare: ISpare) => {
+      let color = 'unset';
       if (spare.is_delayed === 'Sí') {
-        return 'red.500';
+        color = 'red.500';
       }
-      return 'unset';
+
+      if (spare.service_sheet === 'Si') {
+        color = 'green.500';
+      }
+      return color;
     },
     [user],
   );
