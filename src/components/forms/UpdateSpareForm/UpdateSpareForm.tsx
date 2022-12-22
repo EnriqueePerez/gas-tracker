@@ -39,7 +39,7 @@ export const UpdateSpareForm = (props: IUpdateSpareFormProps) => {
       onSubmit={onSubmit}
       validationSchema={ValidationSchema}
     >
-      {({ isSubmitting, isValid, values }) => (
+      {({ isSubmitting, isValid }) => (
         <Box as={Form} {...rest}>
           <InputField
             helperText="Encargado de la tienda"
@@ -109,7 +109,7 @@ export const UpdateSpareForm = (props: IUpdateSpareFormProps) => {
             fp.omitBy((v) => !fp.isNil(v) && !fp.isEmpty(v)),
             fp.values,
             fp.omit(['service_sheet']),
-          )(values) || !service_sheet ? (
+          )(initialValues) || !service_sheet ? (
             <Button
               colorScheme="facebook"
               isDisabled={isSubmitting || !isValid}
