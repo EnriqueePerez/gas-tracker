@@ -126,6 +126,7 @@ export const HomePage = (): JSX.Element => {
         </Stack>
       </Stack>
 
+      <Heading size="xs">Bienvenido {user?.displayName}</Heading>
       <TankListing mt={8} tanks={tanks} w="100%" />
 
       <CreateTankDrawer
