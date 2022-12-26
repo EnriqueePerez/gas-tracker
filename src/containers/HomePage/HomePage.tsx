@@ -113,17 +113,19 @@ export const HomePage = (): JSX.Element => {
       <Stack isInline justify="space-between" w="100%">
         <Heading>Gas Tracker</Heading>
 
-        <Stack isInline spacing={4}>
-          <Button
-            alignSelf="end"
-            colorScheme="green"
-            onClick={onOpen}
-            px={5}
-            size="sm"
-          >
-            Registrar Boya
-          </Button>
-        </Stack>
+        {user?.uid === '1' || user?.uid === '9' || user?.uid === '13' ? (
+          <Stack isInline spacing={4}>
+            <Button
+              alignSelf="end"
+              colorScheme="green"
+              onClick={onOpen}
+              px={5}
+              size="sm"
+            >
+              Registrar Boya
+            </Button>
+          </Stack>
+        ) : null}
       </Stack>
 
       <Heading size="xs">Bienvenido {user?.displayName}</Heading>
