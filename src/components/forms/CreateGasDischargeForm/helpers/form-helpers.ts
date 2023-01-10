@@ -52,7 +52,7 @@ export const ValidationSchema = (
           case 'Clima 1':
           case 'Clima 2':
           case 'Clima 3': {
-            let minWeight = tankWeight - 5;
+            let minWeight = tankWeight - 6;
             if (minWeight <= 0) {
               minWeight = initialWeight - gasWeight();
             }
