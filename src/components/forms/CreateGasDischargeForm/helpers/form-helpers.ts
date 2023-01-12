@@ -42,7 +42,7 @@ export const ValidationSchema = (
           case 'Conservación 1': {
             let minWeight = tankWeight - 4;
             if (minWeight <= 0 || minWeight < tankWeight) {
-              minWeight = initialWeight - gasWeight();
+              minWeight = Number((initialWeight - gasWeight()).toFixed(4));
             }
             return field
               .min(minWeight, `No puede ser menor a ${minWeight}`)
@@ -54,7 +54,7 @@ export const ValidationSchema = (
           case 'Clima 3': {
             let minWeight = tankWeight - 6;
             if (minWeight <= 0 || minWeight < tankWeight) {
-              minWeight = initialWeight - gasWeight();
+              minWeight = Number((initialWeight - gasWeight()).toFixed(4));
             }
             return field
               .min(minWeight, `No puede ser menor a ${minWeight}`)
@@ -64,7 +64,7 @@ export const ValidationSchema = (
           case 'Hielo': {
             let minWeight = tankWeight - 3.5;
             if (minWeight <= 0 || minWeight < tankWeight) {
-              minWeight = initialWeight - gasWeight();
+              minWeight = Number((initialWeight - gasWeight()).toFixed(4));
             }
             return field
               .min(minWeight, `No puede ser menor a ${minWeight}`)
@@ -74,7 +74,7 @@ export const ValidationSchema = (
           case 'Salchikoxka': {
             let minWeight = tankWeight - 1.1;
             if (minWeight <= 0 || minWeight < tankWeight) {
-              minWeight = initialWeight - gasWeight();
+              minWeight = Number((initialWeight - gasWeight()).toFixed(4));
             }
             return field
               .min(minWeight, `No puede ser menor a ${minWeight}`)
@@ -84,8 +84,9 @@ export const ValidationSchema = (
           case 'Imbera':
           case 'Enfriador de Corona': {
             let minWeight = tankWeight - 0.9;
+
             if (minWeight <= 0 || minWeight < tankWeight) {
-              minWeight = initialWeight - gasWeight();
+              minWeight = Number((initialWeight - gasWeight()).toFixed(4));
             }
             return field
               .min(minWeight, `No puede ser menor a ${minWeight}`)
