@@ -41,7 +41,7 @@ export const ValidationSchema = (
         switch (unit) {
           case 'Conservación 1': {
             let minWeight = tankWeight - 4;
-            if (minWeight <= 0) {
+            if (minWeight <= 0 || minWeight < tankWeight) {
               minWeight = initialWeight - gasWeight();
             }
             return field
@@ -53,7 +53,7 @@ export const ValidationSchema = (
           case 'Clima 2':
           case 'Clima 3': {
             let minWeight = tankWeight - 6;
-            if (minWeight <= 0) {
+            if (minWeight <= 0 || minWeight < tankWeight) {
               minWeight = initialWeight - gasWeight();
             }
             return field
@@ -63,7 +63,7 @@ export const ValidationSchema = (
           case 'Cerveza':
           case 'Hielo': {
             let minWeight = tankWeight - 3.5;
-            if (minWeight <= 0) {
+            if (minWeight <= 0 || minWeight < tankWeight) {
               minWeight = initialWeight - gasWeight();
             }
             return field
@@ -73,7 +73,7 @@ export const ValidationSchema = (
           case 'Koxka':
           case 'Salchikoxka': {
             let minWeight = tankWeight - 1.1;
-            if (minWeight <= 0) {
+            if (minWeight <= 0 || minWeight < tankWeight) {
               minWeight = initialWeight - gasWeight();
             }
             return field
@@ -84,7 +84,7 @@ export const ValidationSchema = (
           case 'Imbera':
           case 'Enfriador de Corona': {
             let minWeight = tankWeight - 0.9;
-            if (minWeight <= 0) {
+            if (minWeight <= 0 || minWeight < tankWeight) {
               minWeight = initialWeight - gasWeight();
             }
             return field
