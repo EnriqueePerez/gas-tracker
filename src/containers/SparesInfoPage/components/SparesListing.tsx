@@ -137,7 +137,7 @@ export const SparesListing: React.FC<ISparesListingProps> = (
             ))
           : spares?.map((spare) => (
               <Tbody key={spare?.id}>
-                <Tr position="relative">
+                <Tr color={setColor(spare)} position="relative">
                   <Td>{spare?.store}</Td>
                   <Td>{spare?.registrant_name}</Td>
                   <Td>{spare?.folio}</Td>
