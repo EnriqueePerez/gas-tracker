@@ -50,17 +50,16 @@ export const SparesListing: React.FC<ISparesListingProps> = (
       }
 
       if (!spare.authorization_date || !spare.reception_date) {
-        color = 'orange.500';
         return color;
       }
 
       if (!spare.installation_date || !spare.service_sheet) {
-        color = 'yellow.300';
+        color = 'yellow.500';
         return color;
       }
 
       if (spare.service_sheet === 'Si') {
-        color = 'green.300';
+        color = 'green.500';
         return color;
       }
 
