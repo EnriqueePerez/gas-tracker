@@ -22,6 +22,22 @@ export const TankInfoPage = (): JSX.Element => {
   const { state } = useLocation();
   const navigate = useNavigate();
 
+  const getLiquidWeight = (refrigerant: string) => {
+    switch (refrigerant) {
+      case 'R22':
+        return 13.6;
+      case 'R404':
+        return 10.89;
+      case 'R134':
+        return 13.62;
+      case 'R410':
+      case 'R449':
+        return 11.35;
+      default:
+        return 0;
+    }
+  };
+
   useEffect(() => {
     getGasDischarges((state as { tank_id: string })?.tank_id);
   }, []);
@@ -34,6 +50,10 @@ export const TankInfoPage = (): JSX.Element => {
       </Heading>
       <Heading size="sm">
         Peso Inicial: {(state as { initial_weight: number })?.initial_weight}
+      </Heading>
+      <Heading size="sm">
+        Peso Liquido:{' '}
+        {getLiquidWeight((state as { refrigerant: string })?.refrigerant)}
       </Heading>
 
       <Box mt={8} overflow="scroll" w="100%">

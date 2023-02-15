@@ -87,6 +87,7 @@ export const TankListing: React.FC<ITankListingProps> = (
                   navigate('/tank-info', {
                     state: {
                       initial_weight: tank?.initial_weight,
+                      refrigerant: tank?.refrigerant,
                       tank_id: tank?.id,
                     },
                   })
