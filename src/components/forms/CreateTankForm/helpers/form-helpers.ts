@@ -30,7 +30,7 @@ export const ValidationSchema = Yup.object().shape({
         case 'R449':
           return field
             .min(11.35, 'No puede ser menor a 11.35')
-            .max(14.91, 'No puede ser mayor a 14.91');
+            .max(14.93, 'No puede ser mayor a 14.93');
         default:
           return field.min(0, 'No puede ser menor a 0');
       }
