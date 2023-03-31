@@ -44,6 +44,14 @@ export const SparesListing: React.FC<ISparesListingProps> = (
   const setColor = useCallback(
     (spare: ISpare) => {
       let color = 'unset';
+      if (
+        new Date(spare.created_at as string) <=
+        new Date(new Date().getTime() - 4838400000) // 56 days
+      ) {
+        color = 'blue.500';
+        return color;
+      }
+
       if (!spare.request_date) {
         color = 'red.300';
         return color;
