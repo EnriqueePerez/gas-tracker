@@ -3,16 +3,20 @@ import { useUser } from 'reactfire';
 
 import { CreateTankForm, ICreateTankFormValues } from '../../components/forms';
 import { ITank, useTanks } from '../../hooks/useTanks';
+import { useUsers } from '../../hooks/useUsers';
 
 export const CreateTankPage = (): JSX.Element => {
   const { postTank } = useTanks();
   const { data: user } = useUser();
+  const { users } = useUsers();
 
   const handleOnSubmit = async (v: ICreateTankFormValues) => {
+    const userFound = users.find((u) => u.id === user?.uid);
     const newTank: ITank = {
       id: v.id,
       owner_id: Number(user?.uid),
-      owner_name: user?.displayName as string,
+      owner_name:
+        (userFound?.shortenedName as string) || (userFound?.name as string),
       refrigerant: v.refrigerant,
       tank_weight: v.tank_weight,
     };

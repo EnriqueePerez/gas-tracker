@@ -54,7 +54,9 @@ export const TransferTankForm = (props: ITransferTankFormProps) => {
             label="Receptor/Nuevo dueño"
             mb={4}
             name="new_owner_name"
-            options={users.map((user) => user.name as string)}
+            options={users.map(
+              (user) => (user.shortenedName as string) || (user.name as string),
+            )}
             placeholder="Seleccione el usuario"
           />
 

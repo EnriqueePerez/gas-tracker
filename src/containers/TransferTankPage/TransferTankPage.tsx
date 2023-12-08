@@ -39,7 +39,11 @@ export const TransferTankPage = (): JSX.Element => {
   const handleOnSubmit = async (v: ITransferTankFormValues) => {
     const newTransferTank: ISendedTank = {
       new_owner_id: Number(
-        users.find((usr) => usr.name === v.new_owner_name)?.id,
+        users.find(
+          (usr) =>
+            usr.shortenedName === v.new_owner_name ||
+            usr.name === v.new_owner_name,
+        )?.id,
       ),
       new_owner_name: v.new_owner_name,
       tank_id: v.tank_id,

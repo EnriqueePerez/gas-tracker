@@ -23,6 +23,7 @@ import { IAcceptInviteFormValues } from '../../components/forms/AcceptInviteForm
 import { useFirebaseLogin } from '../../hooks/useFirebaseLogin';
 import { ISendedTank, useSendedTanks } from '../../hooks/useSendedTanks';
 import { ITank, useTanks } from '../../hooks/useTanks';
+import { useUsers } from '../../hooks/useUsers';
 import { CreateTankDrawer } from './components/CreateTankDrawer';
 import { TankListing } from './components/TankListing';
 
@@ -40,6 +41,7 @@ export const HomePage = (): JSX.Element => {
   const { getTanks, postTank, tanks } = useTanks();
   const { getTransferInvite, patchSendedTank } = useSendedTanks();
   const { data: user } = useUser();
+  const { users, getUsers } = useUsers();
   const { login, logout } = useFirebaseLogin();
   const toast = useToast();
 
@@ -104,6 +106,7 @@ export const HomePage = (): JSX.Element => {
 
   useEffect(() => {
     fetchTransferInvites();
+    getUsers();
     getTanks();
   }, []);
 
@@ -129,7 +132,7 @@ export const HomePage = (): JSX.Element => {
       </Stack>
 
       <Heading size="xs">Bienvenido {user?.displayName}</Heading>
-      <TankListing mt={8} tanks={tanks} w="100%" />
+      <TankListing mt={8} tanks={tanks} users={users} w="100%" />
 
       <CreateTankDrawer
         isOpen={isOpen}

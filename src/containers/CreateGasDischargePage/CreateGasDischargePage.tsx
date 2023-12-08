@@ -12,11 +12,13 @@ import { getCurrentDate } from '../../helpers';
 import { IGasDischarge, useGasDischarges } from '../../hooks/useGasDischarges';
 import { useStores } from '../../hooks/useStores';
 import { ITank } from '../../hooks/useTanks';
+import { useUsers } from '../../hooks/useUsers';
 
 export const CreateGasDischargePage = (): JSX.Element => {
   const { postGasDischarge } = useGasDischarges();
   const { getStores, stores } = useStores();
   const { data: user } = useUser();
+  const { users } = useUsers();
 
   const location = useLocation();
 
@@ -26,10 +28,12 @@ export const CreateGasDischargePage = (): JSX.Element => {
 
   const handleOnSubmit = async (v: ICreateGasDischargeFormValues) => {
     const tank_id = (location.state as { tank_id: string })?.tank_id;
+    const userFound = users.find((u) => u.id === user?.uid);
     try {
       const payload: IGasDischarge = {
         ...v,
-        owner_name: user?.displayName as string,
+        owner_name:
+          (userFound?.shortenedName as string) || (userFound?.name as string),
         tank_id,
         timedate_of_start: getCurrentDate(v.timedate_of_start),
       };

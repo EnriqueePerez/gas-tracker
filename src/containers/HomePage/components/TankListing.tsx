@@ -15,6 +15,7 @@ import { useUser } from 'reactfire';
 
 import { Td, TdActions, Th } from '../../../components/libs';
 import { ITank } from '../../../hooks/useTanks';
+import { IUser } from '../../../hooks/useUsers';
 import { HEADERS } from '../helpers';
 
 export interface ITankListingProps extends BoxProps {
@@ -22,12 +23,16 @@ export interface ITankListingProps extends BoxProps {
    * Data retrieved from the API.
    */
   tanks?: ITank[];
+  /**
+   * Users data retrieved from the API.
+   */
+  users?: IUser[];
 }
 
 export const TankListing: React.FC<ITankListingProps> = (
   props,
 ): JSX.Element => {
-  const { tanks = [], ...rest } = props;
+  const { tanks = [], users, ...rest } = props;
 
   const { data: user } = useUser();
 
@@ -61,6 +66,15 @@ export const TankListing: React.FC<ITankListingProps> = (
     [user],
   );
 
+  const getUserName = useCallback(
+    (id: number) => {
+      const userFound = users?.find((u) => u.id === String(id));
+      console.log(userFound);
+      return userFound?.shortenedName || userFound?.name;
+    },
+    [users],
+  );
+
   return (
     <Box {...rest}>
       <Table size="sm" variant="simple">
@@ -76,7 +90,7 @@ export const TankListing: React.FC<ITankListingProps> = (
           <Tbody key={tank?.id}>
             <Tr position="relative">
               <Td>{tank?.id}</Td>
-              <Td>{tank?.owner_name}</Td>
+              <Td>{getUserName(tank?.owner_id as number)}</Td>
               <Td>{tank?.refrigerant}</Td>
               <Td>{tank?.tank_weight}</Td>
               <Td>
